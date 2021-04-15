@@ -14,22 +14,24 @@
 </head>
 
 <body>
-    <nav class="navbar has-background-primary-dark" role="navigation" aria-label="main navigation">
+    <nav class="navbar has-background-primary-dark is-spaced" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <a class="navbar-item" href="index.html">
-                <img src="http://placekitten.com/256/256" height="28">
+                <img src="./assets/img/Gifta-logo-green.png" alt="Gifta">
             </a>
-            <h1 class="title is-align-self-center">Gifta</h1>
         </div>
         <div id="navbarBasicExample" class="navbar-menu">
             <div class="navbar-end">
-                <a class="navbar-item">
+                <a class="navbar-item has-text-white" href="#about">
                     ABOUT
                 </a>
-                <a class="navbar-item">
+                <a class="navbar-item has-text-white" href="#faq">
                     FAQ
                 </a>
-                <a class="navbar-item">
+                <a class="navbar-item has-text-white" href="#team">
+                    TEAM
+                </a>
+                <a class="navbar-item has-text-white" href="#contact">
                     CONTACT
                 </a>
             </div>
@@ -92,7 +94,7 @@
                         </div>
                     </div>
                     <button class="button is-primary" id="search">
-                        Search
+                        Search &nbsp;<i class="fas fa-recycle"></i>
                     </button>
                 </form>
             </div>
@@ -111,7 +113,7 @@
     <section class="columns has-background-primary">
         <div class="column is-10 is-offset-1">
             <div class="box">
-                <h1 class="title">ABOUT</h1>
+                <h1 class="title" id="about">ABOUT</h1>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet aliquid, repellendus vero harum
                     voluptatum ab est nobis quas molestiae non nihil sapiente asperiores repudiandae mollitia cum
                     provident nesciunt, magnam, vel tempore impedit suscipit perspiciatis iste. Est quidem eos corrupti
@@ -123,7 +125,7 @@
     <section class="columns has-background-primary-light">
         <div class="column is-10 is-offset-1">
             <div class="box">
-                <h1 class="title">FAQ</h1>
+                <h1 class="title" id="faq">FAQ</h1>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo molestiae, sit necessitatibus id
                     inventore ipsa consequatur asperiores dignissimos animi veniam beatae officiis omnis explicabo
                     maxime aspernatur deleniti tempora amet quis! Ducimus nesciunt ipsa beatae unde eveniet blanditiis
@@ -135,10 +137,25 @@
         </div>
     </section>
 
-    <section class="columns mb-0 has-background-primary">
+    <section class="columns has-background-primary">
         <div class="column is-10 is-offset-1">
             <div class="box">
-                <h1 class="title">CONTACT</h1>
+                <h1 class="title" id="team">TEAM</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo molestiae, sit necessitatibus id
+                    inventore ipsa consequatur asperiores dignissimos animi veniam beatae officiis omnis explicabo
+                    maxime aspernatur deleniti tempora amet quis! Ducimus nesciunt ipsa beatae unde eveniet blanditiis
+                    consequuntur? Laborum optio dolorem necessitatibus ipsum placeat atque nam illum labore ratione
+                    numquam.</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, molestiae excepturi! Optio qui,
+                    provident eum et est dolorem odit id?</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="columns mb-0 has-background-primary-light">
+        <div class="column is-10 is-offset-1">
+            <div class="box">
+                <h1 class="title" id="contact">CONTACT</h1>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat recusandae molestiae dolore maxime
                     consequatur commodi. Nam, blanditiis accusantium. Numquam quidem cumque in debitis quae? Quo harum
                     autem eius consequuntur quaerat est veritatis sed voluptatum reprehenderit velit, cumque numquam ab
@@ -150,5 +167,14 @@
         </div>
     </section>
 </body>
+<footer class="footer has-background-dark pt-3 pb-3">
+    <div class="container">
+      <div class="content has-text-centered has-text-white">
+        <p>
+            © Gifta 2021. Made by Kinda Communities.
+        </p>
+      </div>
+    </div>
+  </footer>
 
 </html>
