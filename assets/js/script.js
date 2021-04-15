@@ -45,7 +45,6 @@ function getLocationAndSearch(postcode) {
     fields: ["geometry"],
     locationBias: australia
   };
-  console.log(placesServiceRequest);
   placesService = new google.maps.places.PlacesService(map);
   placesService.findPlaceFromQuery(placesServiceRequest, (places, responseStatus) => {
     if (responseStatus === google.maps.places.PlacesServiceStatus.OK && places) {
