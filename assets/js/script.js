@@ -3,6 +3,7 @@ let map;
 let placesService;
 let infowindow;
 let markers = [];
+const australia = { lat: -25.274, lng: 133.775 };
 
 init();
 
@@ -15,42 +16,73 @@ function init() {
 function initMap() {
   infowindow = new google.maps.InfoWindow();
   map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: -25.274, lng: 133.775 },
+    center: australia,
     zoom: 4,
   });
 }
 
 function search(onClickEvent) {
   onClickEvent.preventDefault();
-  markers.forEach((marker) => {
-    marker.setMap(null);
+  clearMarkers();
+  const postcodeInput = document.querySelector("#postcode");
+  if (postcodeInput.value) {
+    const postcode = postcodeInput.value;
+    if (!postcodes.includes(postcode)) {
+      // FIX THIS
+      alert("Please enter a valid postcode")
+      return;
+    }
+    getLocationAndSearch(postcode);
+  }
+  else {
+    searchForCharitiesAcceptingItem(null);
+  }
+}
+
+function getLocationAndSearch(postcode) {
+  const placesServiceRequest = {
+    query: "postcode " + postcode + " Australia",
+    fields: ["geometry"],
+    locationBias: australia
+  };
+  console.log(placesServiceRequest);
+  placesService = new google.maps.places.PlacesService(map);
+  placesService.findPlaceFromQuery(placesServiceRequest, (places, responseStatus) => {
+    if (responseStatus === google.maps.places.PlacesServiceStatus.OK && places) {
+      const location = places[0].geometry.location.toJSON();
+      searchForCharitiesAcceptingItem(location);
+    }
   });
-  markers = [];
+}
+
+function searchForCharitiesAcceptingItem(location) {
   let searchTerms = [];
   const item = document.querySelector('#select').value.toLowerCase();
   charities.forEach(charity => {
-    if(charity.items.includes(item)) {
+    if (charity.items.includes(item)) {
       searchTerms.push(charity.nickName);
     }
   });
-  // const rockingham = {lat: -32.278, lng: 115.735}
   searchTerms.forEach(searchTerm => {
     const placesServiceRequest = {
       query: searchTerm,
       fields: ["name", "geometry", "formatted_address"],
-      // locationBias: rockingham
     };
+    if (location) {
+      placesServiceRequest.locationBias = location;
+    }
     placesService = new google.maps.places.PlacesService(map);
     placesService.findPlaceFromQuery(placesServiceRequest, (places, responseStatus) => {
       if (responseStatus === google.maps.places.PlacesServiceStatus.OK && places) {
-        createMarker(places[0])
-        map.setCenter(places[0].geometry.location);
+        createMarker(places[0]);
+        // map.setCenter(places[0].geometry.location);
       }
     });
   });
 
   function createMarker(place) {
-    if (!place.geometry || !place.geometry.location) return;
+    if (!place.geometry || !place.geometry.location)
+      return;
     const marker = new google.maps.Marker({
       map,
       position: place.geometry.location,
@@ -61,5 +93,12 @@ function search(onClickEvent) {
     });
     markers.push(marker);
   }
+}
+
+function clearMarkers() {
+  markers.forEach((marker) => {
+    marker.setMap(null);
+  });
+  markers = [];
 }
 
