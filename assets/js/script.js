@@ -1,6 +1,6 @@
 //Create the variable for map
 let map;
-let service;
+let placesService;
 let infowindow;
 let markers = [];
 
@@ -26,25 +26,25 @@ function search(onClickEvent) {
     marker.setMap(null);
   });
   markers = [];
-  let matches = [];
+  let searchTerms = [];
   const item = document.querySelector('#select').value.toLowerCase();
   charities.forEach(charity => {
     if(charity.items.includes(item)) {
-      matches.push(charity.nickName);
+      searchTerms.push(charity.nickName);
     }
   });
   // const rockingham = {lat: -32.278, lng: 115.735}
-  matches.forEach(nickName => {
-    const request = {
-      query: nickName,
+  searchTerms.forEach(searchTerm => {
+    const placesServiceRequest = {
+      query: searchTerm,
       fields: ["name", "geometry", "formatted_address"],
       // locationBias: rockingham
     };
-    service = new google.maps.places.PlacesService(map);
-    service.findPlaceFromQuery(request, (results, status) => {
-      if (status === google.maps.places.PlacesServiceStatus.OK && results) {
-        createMarker(results[0])
-        map.setCenter(results[0].geometry.location);
+    placesService = new google.maps.places.PlacesService(map);
+    placesService.findPlaceFromQuery(placesServiceRequest, (places, responseStatus) => {
+      if (responseStatus === google.maps.places.PlacesServiceStatus.OK && places) {
+        createMarker(places[0])
+        map.setCenter(places[0].geometry.location);
       }
     });
   });
@@ -56,51 +56,10 @@ function search(onClickEvent) {
       position: place.geometry.location,
     });
     google.maps.event.addListener(marker, "click", () => {
-      infowindow.setContent(`${place.name}:
-      ${place.formatted_address}`);
+      infowindow.setContent(place.name + ": " + place.formatted_address);
       infowindow.open(map, marker);
     });
     markers.push(marker);
   }
 }
 
-const charities = [
-  {
-    fullName: "St Vincent de Paul Society",
-    nickName: "Vinnies",
-    items: [
-      "shoes",
-      "handbags",
-      "accessories",
-      "clothing",
-      "books",
-      "toys",
-      "homewares",
-      "appliances",
-      "linen",
-    ]
-  },
-  {
-    fullName: "The Salvation Army Australia",
-    nickName: "Salvos",
-    items: [
-      "shoes",
-      "handbags",
-      "accessories",
-      "clothing",
-      "books",
-      "toys",
-      "homewares",
-      "appliances",
-      "linen",
-    ]
-  },
-  {
-    fullName: "Technology for Ageing & Disability WA",
-    nickName: "TADWA",
-    items: [
-      "computers",
-      "computer peripherals",
-    ]
-  }
-]
