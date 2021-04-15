@@ -1,0 +1,13 @@
+#map {
+    height: 30rem;
+  }  
+
+.select, select{
+  width: 100%;
+  text-align-last: center;
+}
+
+button{
+  width: 100%;
+}
+

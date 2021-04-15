@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <script src="./assets/js/postcodes.js" defer></script>
+    <script src="./assets/js/charities.js" defer></script>
+    <script src="./assets/js/script.js" defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBrWndJ08DJDlbszJiaTRd23AZqll06DM&callback=initMap&libraries=places&v=weekly"
+    defer></script>
+    <title>Gifta</title>
+</head>
+
+<body>
+    <nav class="navbar has-background-primary-dark is-spaced" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="index.html">
+                <img src="./assets/img/Gifta-logo-green.png" alt="Gifta">
+            </a>
+        </div>
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-end">
+                <a class="navbar-item has-text-white" href="#about">
+                    ABOUT
+                </a>
+                <a class="navbar-item has-text-white" href="#faq">
+                    FAQ
+                </a>
+                <a class="navbar-item has-text-white" href="#team">
+                    TEAM
+                </a>
+                <a class="navbar-item has-text-white" href="#contact">
+                    CONTACT
+                </a>
+            </div>
+    </nav>
+
+    <section class="columns mt-0 has-background-primary has-text-centered">
+        <div class="column is-2 is-offset-3">
+            <div class="box">
+                <figure class="image">
+                    <img class="is-rounded" src="https://placekitten.com/256/256">
+                </figure>
+                <h1 class="title">Reclaim</h1>
+            </div>
+        </div>
+        <div class="column is-2">
+            <div class="box">
+                <figure class="image">
+                    <img class="is-rounded" src="https://placekitten.com/256/256">
+                </figure>
+                <h1 class="title">Repurpose</h1>
+            </div>
+        </div>
+        <div class="column is-2">
+            <div class="box">
+                <figure class="image">
+                    <img class="is-rounded" src="https://placekitten.com/256/256">
+                </figure>
+                <h1 class="title">Rejoice</h1>
+            </div>
+        </div>
+    </section>
+
+    <section class="columns has-background-primary-light has-text-centered">
+        <div class="column is-4 is-offset-1">
+            <div class="box">
+                <h1 class="title">SEARCH</h1>
+                <form action="">
+                    <div class="field control has-icons-left">
+                        <input class="input is-primary" type="text" placeholder="Postcode" id="postcode">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </span>
+                    </div>
+                    <div class="field control">
+                        <div class="select is-primary">
+                            <select id="select">
+                                <option value="" disabled selected>Select your category</option>
+                                <option>Any</option>
+                                <option>Shoes</option>
+                                <option>Handbags</option>
+                                <option>Computers & Accessories</option>
+                                <option>Towels</option>
+                                <option>Clothes</option>
+                                <option>Books</option>
+                                <option>Toys</option>
+                                <option>Homewares</option>
+                                <option>Applicances</option>
+                                <option>Linen</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="button is-primary" id="search">
+                        Search &nbsp;<i class="fas fa-recycle"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="column is-6">
+            <div class="box">
+                <h1 class="title">MAP</h1>
+                <div id="map"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="columns has-background-primary">
+        <div class="column is-10 is-offset-1">
+            <div class="box">
+                <h1 class="title" id="about">ABOUT</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet aliquid, repellendus vero harum
+                    voluptatum ab est nobis quas molestiae non nihil sapiente asperiores repudiandae mollitia cum
+                    provident nesciunt, magnam, vel tempore impedit suscipit perspiciatis iste. Est quidem eos corrupti
+                    consequuntur optio temporibus, nemo aut accusantium reiciendis pariatur, nobis consectetur eum.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="columns has-background-primary-light">
+        <div class="column is-10 is-offset-1">
+            <div class="box">
+                <h1 class="title" id="faq">FAQ</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo molestiae, sit necessitatibus id
+                    inventore ipsa consequatur asperiores dignissimos animi veniam beatae officiis omnis explicabo
+                    maxime aspernatur deleniti tempora amet quis! Ducimus nesciunt ipsa beatae unde eveniet blanditiis
+                    consequuntur? Laborum optio dolorem necessitatibus ipsum placeat atque nam illum labore ratione
+                    numquam.</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, molestiae excepturi! Optio qui,
+                    provident eum et est dolorem odit id?</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="columns has-background-primary">
+        <div class="column is-10 is-offset-1">
+            <div class="box">
+                <h1 class="title" id="team">TEAM</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo molestiae, sit necessitatibus id
+                    inventore ipsa consequatur asperiores dignissimos animi veniam beatae officiis omnis explicabo
+                    maxime aspernatur deleniti tempora amet quis! Ducimus nesciunt ipsa beatae unde eveniet blanditiis
+                    consequuntur? Laborum optio dolorem necessitatibus ipsum placeat atque nam illum labore ratione
+                    numquam.</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, molestiae excepturi! Optio qui,
+                    provident eum et est dolorem odit id?</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="columns mb-0 has-background-primary-light">
+        <div class="column is-10 is-offset-1">
+            <div class="box">
+                <h1 class="title" id="contact">CONTACT</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat recusandae molestiae dolore maxime
+                    consequatur commodi. Nam, blanditiis accusantium. Numquam quidem cumque in debitis quae? Quo harum
+                    autem eius consequuntur quaerat est veritatis sed voluptatum reprehenderit velit, cumque numquam ab
+                    officiis nisi dicta deserunt accusamus. Harum fugiat dicta excepturi natus corporis!</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque corporis consectetur consequuntur
+                    repellendus id animi! Tempore, qui at. Omnis id laboriosam dolorum quisquam dolor necessitatibus
+                    ullam placeat vero quibusdam suscipit.</p>
+            </div>
+        </div>
+    </section>
+</body>
+<footer class="footer has-background-dark pt-3 pb-3">
+    <div class="container">
+      <div class="content has-text-centered has-text-white">
+        <p>
+            © Gifta 2021. Made by Kinda Communities.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+</html>
