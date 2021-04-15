@@ -59,7 +59,7 @@ function searchForCharitiesAcceptingItem(location) {
   const item = document.querySelector('#select').value.toLowerCase();
   charities.forEach(charity => {
     if (charity.items.includes(item)) {
-      searchTerms.push(charity.nickName);
+      searchTerms.push(charity.searchTerm);
     }
   });
   searchTerms.forEach(searchTerm => {

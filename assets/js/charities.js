@@ -1,7 +1,7 @@
 const charities = [
     {
-      fullName: "St Vincent de Paul Society",
-      nickName: "Vinnies",
+      name: "St Vincent de Paul Society",
+      searchTerm: "Vinnies",
       items: [
         "shoes",
         "handbags",
@@ -15,8 +15,8 @@ const charities = [
       ]
     },
     {
-      fullName: "The Salvation Army Australia",
-      nickName: "Salvos",
+      name: "The Salvation Army Australia",
+      searchTerm: "Salvos",
       items: [
         "shoes",
         "handbags",
@@ -30,8 +30,8 @@ const charities = [
       ]
     },
     {
-      fullName: "Technology for Ageing & Disability WA",
-      nickName: "TADWA",
+      name: "Technology for Ageing & Disability WA",
+      searchTerm: "TADWA",
       items: [
         "computers & accessories",
       ]
