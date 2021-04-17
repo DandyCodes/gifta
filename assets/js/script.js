@@ -13,45 +13,48 @@ function init() {
   searchButton.addEventListener("click", search);
   //Call on the load history function
   loadHistory();
+  const options = document.querySelectorAll("option");
+  Array.from(options).forEach(function (option){
+    option.value = option.textContent.toLowerCase();
+  })
 }
 
 function loadHistory() {
   searches = JSON.parse(localStorage.getItem("searches"));
   if (!searches) {
-    searches = []
+    searches = [];
   }
   searches.forEach(function (search) {
     let postcode = search.postcode;
     let itemName = search.itemName;
     createPreviousSearchButton(postcode, itemName);
-  })
+  });
 }
 
 function search(onClickEvent) {
   onClickEvent.preventDefault();
   clearMarkers();
   const postcodeInput = document.querySelector("#postcode");
-  const item = document.querySelector('#select').value.toLowerCase();
+  const selectedItemName = document.querySelector("#select").value.toLowerCase();
   if (postcodeInput.value) {
     const postcode = postcodeInput.value;
     if (!postcodes.includes(postcode)) {
       // FIX THIS
-      alert("Please enter a valid postcode")
+      alert("Please enter a valid postcode");
       return;
     }
     getLocationAndSearch(postcode);
-  }
-  else {
+  } else {
     searchForCharitiesAcceptingItem(null);
   }
-  createPreviousSearchButton(postcodeInput.value, item);
-  saveSearchToLocalStorage(postcodeInput.value, item);
+  createPreviousSearchButton(postcodeInput.value, selectedItemName);
+  saveSearchToLocalStorage(postcodeInput.value, selectedItemName);
 }
 
-function saveSearchToLocalStorage(postcodeInputValue, item) {
+function saveSearchToLocalStorage(postcodeInputValue, selectedItemName) {
   let search = {
     postcode: postcodeInputValue,
-    itemName: item,
+    itemName: selectedItemName,
   };
   searches.push(search);
   console.log(searches);
@@ -59,11 +62,19 @@ function saveSearchToLocalStorage(postcodeInputValue, item) {
 }
 
 //--added by SP
-function createPreviousSearchButton(postcodeInputValue, item) {
+function createPreviousSearchButton(postcodeInputValue, selectedItemName) {
   var searchHistory = $("#list-group");
-  let button = $(`<button>${postcodeInputValue} - ${item}</button>`);
-  // button.click(function (e) {
-  // });
+  let button = $(
+    `<button data-postcode="${postcodeInputValue}" data-item="${selectedItemName}">${postcodeInputValue} - ${selectedItemName}</button>`
+  );
+  button.click(function (e) {
+    const postcode = this.dataset.postcode;
+    const itemName = this.dataset.item;
+    const postcodeInput = document.querySelector("#postcode");
+    const selectInput = document.querySelector("#select");
+    postcodeInput.value = postcode;
+    selectInput.value = itemName;
+  });
   searchHistory.append(button);
 }
 
@@ -80,26 +91,32 @@ function getLocationAndSearch(postcode) {
   const placesServiceRequest = {
     query: "postcode " + postcode + " Australia",
     fields: ["geometry"],
-    locationBias: australia
+    locationBias: australia,
   };
   placesService = new google.maps.places.PlacesService(map);
-  placesService.findPlaceFromQuery(placesServiceRequest, (places, responseStatus) => {
-    if (responseStatus === google.maps.places.PlacesServiceStatus.OK && places) {
-      const location = places[0].geometry.location.toJSON();
-      searchForCharitiesAcceptingItem(location);
+  placesService.findPlaceFromQuery(
+    placesServiceRequest,
+    (places, responseStatus) => {
+      if (
+        responseStatus === google.maps.places.PlacesServiceStatus.OK &&
+        places
+      ) {
+        const location = places[0].geometry.location.toJSON();
+        searchForCharitiesAcceptingItem(location);
+      }
     }
-  });
+  );
 }
 
 function searchForCharitiesAcceptingItem(location) {
   let searchTerms = [];
-  const item = document.querySelector('#select').value.toLowerCase();
-  charities.forEach(charity => {
+  const item = document.querySelector("#select").value.toLowerCase();
+  charities.forEach((charity) => {
     if (charity.items.includes(item)) {
       searchTerms.push(charity.searchTerm);
     }
   });
-  searchTerms.forEach(searchTerm => {
+  searchTerms.forEach((searchTerm) => {
     const placesServiceRequest = {
       query: searchTerm,
       fields: ["name", "geometry", "formatted_address"],
@@ -108,17 +125,22 @@ function searchForCharitiesAcceptingItem(location) {
       placesServiceRequest.locationBias = location;
     }
     placesService = new google.maps.places.PlacesService(map);
-    placesService.findPlaceFromQuery(placesServiceRequest, (places, responseStatus) => {
-      if (responseStatus === google.maps.places.PlacesServiceStatus.OK && places) {
-        createMarker(places[0]);
-        // map.setCenter(places[0].geometry.location);
+    placesService.findPlaceFromQuery(
+      placesServiceRequest,
+      (places, responseStatus) => {
+        if (
+          responseStatus === google.maps.places.PlacesServiceStatus.OK &&
+          places
+        ) {
+          createMarker(places[0]);
+          // map.setCenter(places[0].geometry.location);
+        }
       }
-    });
+    );
   });
 
   function createMarker(place) {
-    if (!place.geometry || !place.geometry.location)
-      return;
+    if (!place.geometry || !place.geometry.location) return;
     const marker = new google.maps.Marker({
       map,
       position: place.geometry.location,
@@ -137,6 +159,3 @@ function clearMarkers() {
   });
   markers = [];
 }
-
-
-
