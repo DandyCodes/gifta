@@ -11,3 +11,8 @@ button{
   width: 100%;
 }
 
+.list-group button{
+  display: block;
+  width: 300px;
+  margin: 5px;
+}

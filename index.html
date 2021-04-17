@@ -5,19 +5,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/jpg" href="./assets/img/favicon.ico"/>
+    <link rel="shortcut icon" type="image/jpg" href="./assets/img/favicon.ico" />
     <link rel="stylesheet" href="./assets/css/mystyles.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
     <link rel="stylesheet" href="./assets/css/styles.css">
     <title>Gifta</title>
+    <script src="./assets/js/postcodes.js" defer></script>
+    <script src="./assets/js/charities.js" defer></script>
+    <script src="./assets/js/script.js" defer></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBrWndJ08DJDlbszJiaTRd23AZqll06DM&callback=initMap&libraries=places&v=weekly"
+        defer></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
 
 <body>
     <nav class="navbar has-background-primary-dark is-spaced" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <a class="navbar-item" href="index.html">
-                <img src="./assets/img/Gifta-logo-green.png" alt="Gifta">
+                <img src="./assets/img/Gifta-logo-white2.png" alt="Gifta">
             </a>
         </div>
         <div id="navbarBasicExample" class="navbar-menu">
@@ -41,7 +48,7 @@
         <div class="column is-2 is-offset-3">
             <div class="box">
                 <figure class="image">
-                    <img class="is-rounded" src="https://placekitten.com/256/256">
+                    <img class="is-rounded" src="./assets/img/Gifta-reclaim.png" alt="reclaim">
                 </figure>
                 <h1 class="title">Reclaim</h1>
             </div>
@@ -49,7 +56,7 @@
         <div class="column is-2">
             <div class="box">
                 <figure class="image">
-                    <img class="is-rounded" src="https://placekitten.com/256/256">
+                    <img class="is-rounded" src="./assets/img/Gifta-repurpose.png" alt="repurpose">
                 </figure>
                 <h1 class="title">Repurpose</h1>
             </div>
@@ -57,7 +64,7 @@
         <div class="column is-2">
             <div class="box">
                 <figure class="image">
-                    <img class="is-rounded" src="https://placekitten.com/256/256">
+                    <img class="is-rounded" src="./assets/img/Gifta-rejoice.png" alt="rejoice">
                 </figure>
                 <h1 class="title">Rejoice</h1>
             </div>
@@ -89,7 +96,9 @@
                                 <option>Toys</option>
                                 <option>Homewares</option>
                                 <option>Applicances</option>
-                                <option>Linen</option>
+                                <option>Blankets</option>
+                                <option>Bikes</option>
+                                <option>Furniture</option>
                             </select>
                         </div>
                     </div>
@@ -97,6 +106,8 @@
                         Search &nbsp;<i class="fas fa-recycle"></i>
                     </button>
                 </form>
+                <div id="list-group">
+                </div>
             </div>
         </div>
         <div class="column is-6">
@@ -164,21 +175,15 @@
         </div>
     </section>
 
-
-    <script src="./assets/js/postcodes.js"></script>
-    <script src="./assets/js/charities.js"></script>
-    <script src="./assets/js/script.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBrWndJ08DJDlbszJiaTRd23AZqll06DM&callback=initMap&libraries=places&v=weekly"
-    ></script>
 </body>
 <footer class="footer has-background-dark pt-3 pb-3">
     <div class="container">
-      <div class="content has-text-centered has-text-white">
-        <p>
-            © Gifta 2021. Made by Kinda Communities.
-        </p>
-      </div>
+        <div class="content has-text-centered has-text-white">
+            <p>
+                © Gifta 2021. Made by Kinda Communities.
+            </p>
+        </div>
     </div>
-  </footer>
+</footer>
 
 </html>
