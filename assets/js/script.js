@@ -1,30 +1,37 @@
-//Create the variable for map
+//Create the variables
 let map;
 let placesService;
 let infowindow;
 let markers = [];
 const australia = { lat: -25.274, lng: 133.775 };
+let searches = [];
 
 init();
 
 function init() {
   const searchButton = document.querySelector("#search");
   searchButton.addEventListener("click", search);
+  //Call on the load history function
+  loadHistory();
 }
 
-//Renders the map to the page with a default position with the center of Australia displayed
-function initMap() {
-  infowindow = new google.maps.InfoWindow();
-  map = new google.maps.Map(document.getElementById("map"), {
-    center: australia,
-    zoom: 4,
-  });
+function loadHistory() {
+  searches = JSON.parse(localStorage.getItem("searches"));
+  if (!searches) {
+    searches = []
+  }
+  searches.forEach(function (search) {
+    let postcode = search.postcode;
+    let itemName = search.itemName;
+    createPreviousSearchButton(postcode, itemName);
+  })
 }
 
 function search(onClickEvent) {
   onClickEvent.preventDefault();
   clearMarkers();
   const postcodeInput = document.querySelector("#postcode");
+  const item = document.querySelector('#select').value.toLowerCase();
   if (postcodeInput.value) {
     const postcode = postcodeInput.value;
     if (!postcodes.includes(postcode)) {
@@ -37,6 +44,36 @@ function search(onClickEvent) {
   else {
     searchForCharitiesAcceptingItem(null);
   }
+  createPreviousSearchButton(postcodeInput.value, item);
+  saveSearchToLocalStorage(postcodeInput.value, item);
+}
+
+function saveSearchToLocalStorage(postcodeInputValue, item) {
+  let search = {
+    postcode: postcodeInputValue,
+    itemName: item,
+  };
+  searches.push(search);
+  console.log(searches);
+  localStorage.setItem("searches", JSON.stringify(searches));
+}
+
+//--added by SP
+function createPreviousSearchButton(postcodeInputValue, item) {
+  var searchHistory = $("#list-group");
+  let button = $(`<button>${postcodeInputValue} - ${item}</button>`);
+  // button.click(function (e) {
+  // });
+  searchHistory.append(button);
+}
+
+//Renders the map to the page with a default position with the center of Australia displayed
+function initMap() {
+  infowindow = new google.maps.InfoWindow();
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: australia,
+    zoom: 4,
+  });
 }
 
 function getLocationAndSearch(postcode) {
@@ -100,4 +137,6 @@ function clearMarkers() {
   });
   markers = [];
 }
+
+
 

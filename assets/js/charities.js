@@ -35,5 +35,36 @@ const charities = [
       items: [
         "computers & accessories",
       ]
+    },
+    {
+      name: "Bicycles for Humanity Western Australia",
+      searchTerm: "Bicycles for Humanity Western Australia",
+      items: [
+        "bikes",
+      ]
+    },
+    {
+      name: "Dogs' Refuge Home",
+      searchTerm: "Dogs Refuge Home",
+      items: [
+        "blankets",
+        "towels",
+      ]
+    },
+    {
+      name: "Good Samaritan Industries",
+      searchTerm: "Good Sammy",
+      items: [
+        "shoes",
+        "handbags",
+        "clothes",
+        "books",
+        "toys",
+        "homewares",
+        "appliances",
+        "linen",
+        "towels",
+        "furniture",
+      ]
     }
   ]
