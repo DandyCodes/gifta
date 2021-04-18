@@ -16,7 +16,7 @@ function init() {
   const options = document.querySelectorAll("option");
   Array.from(options).forEach(function (option){
     option.value = option.textContent.toLowerCase();
-  })
+  });
 }
 
 function loadHistory() {
@@ -47,8 +47,20 @@ function search(onClickEvent) {
   } else {
     searchForCharitiesAcceptingItem(null);
   }
-  createPreviousSearchButton(postcodeInput.value, selectedItemName);
-  saveSearchToLocalStorage(postcodeInput.value, selectedItemName);
+  if (selectedItemName === "select your category") return;
+  UpdateSearchHistory(selectedItemName, postcodeInput.value);
+}
+
+function UpdateSearchHistory(selectedItemName, postcodeInputValue) {
+  let alreadyExists = false;
+  searches.forEach(search => {
+    if (search.itemName == selectedItemName && search.postcode == postcodeInputValue) {
+      alreadyExists = true;
+    }
+  });
+  if (alreadyExists) return;
+  createPreviousSearchButton(postcodeInputValue, selectedItemName);
+  saveSearchToLocalStorage(postcodeInputValue, selectedItemName);
 }
 
 function saveSearchToLocalStorage(postcodeInputValue, selectedItemName) {
@@ -57,25 +69,36 @@ function saveSearchToLocalStorage(postcodeInputValue, selectedItemName) {
     itemName: selectedItemName,
   };
   searches.push(search);
-  console.log(searches);
   localStorage.setItem("searches", JSON.stringify(searches));
 }
 
 //--added by SP
 function createPreviousSearchButton(postcodeInputValue, selectedItemName) {
   var searchHistory = $("#list-group");
-  let button = $(
+  let $button = $(
     `<button data-postcode="${postcodeInputValue}" data-item="${selectedItemName}">${postcodeInputValue} - ${selectedItemName}</button>`
   );
-  button.click(function (e) {
+  $button.addClass("button")
+  $button[0].style.display = "inline-flex";
+  $button[0].style.alignItems = "center";
+  $button[0].style.justifyContent = "space-between";
+  const $delete = $('<button class="delete"></button>');
+  $delete.click(function (event) {
+    event.stopPropagation();
+    const parent = this.closest('.button');
+    parent.remove();
+  })
+  $button.append($delete);
+  $button.click(function (e) {
     const postcode = this.dataset.postcode;
     const itemName = this.dataset.item;
     const postcodeInput = document.querySelector("#postcode");
     const selectInput = document.querySelector("#select");
     postcodeInput.value = postcode;
     selectInput.value = itemName;
+    search(e);
   });
-  searchHistory.append(button);
+  searchHistory.append($button);
 }
 
 //Renders the map to the page with a default position with the center of Australia displayed

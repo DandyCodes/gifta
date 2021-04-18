@@ -20,61 +20,50 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
 
-<body>
-    <nav class="navbar has-background-primary-dark is-spaced" role="navigation" aria-label="main navigation">
+<body class="has-background-primary-light">
+    <nav class="navbar has-background-primary-white is-spaced" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-            <a class="navbar-item" href="index.html">
-                <img src="./assets/img/Gifta-logo-white2.png" alt="Gifta">
+            <a class="navbar-item-image" href="index.html">
             </a>
         </div>
         <div id="navbarBasicExample" class="navbar-menu">
             <div class="navbar-end">
-                <a class="navbar-item has-text-white" href="#about">
+                <a class="navbar-item has-text-primary" href="#about">
                     ABOUT
                 </a>
-                <a class="navbar-item has-text-white" href="#faq">
+                <a class="navbar-item has-text-primary" href="#faq">
                     FAQ
                 </a>
-                <a class="navbar-item has-text-white" href="#team">
+                <a class="navbar-item has-text-primary" href="#team">
                     TEAM
                 </a>
-                <a class="navbar-item has-text-white" href="#contact">
+                <a class="navbar-item has-text-primary" href="#contact">
                     CONTACT
                 </a>
             </div>
     </nav>
 
-    <section class="columns mt-0 has-background-primary has-text-centered">
-        <div class="column is-2 is-offset-3">
-            <div class="box">
-                <figure class="image">
-                    <img class="is-rounded" src="./assets/img/Gifta-reclaim.png" alt="reclaim">
-                </figure>
-                <h1 class="title">Reclaim</h1>
-            </div>
-        </div>
-        <div class="column is-2">
-            <div class="box">
-                <figure class="image">
-                    <img class="is-rounded" src="./assets/img/Gifta-repurpose.png" alt="repurpose">
-                </figure>
-                <h1 class="title">Repurpose</h1>
-            </div>
-        </div>
-        <div class="column is-2">
-            <div class="box">
-                <figure class="image">
-                    <img class="is-rounded" src="./assets/img/Gifta-rejoice.png" alt="rejoice">
-                </figure>
-                <h1 class="title">Rejoice</h1>
-            </div>
+    <section class="hero is-large is-info">
+        <div class="hero-body header-image">
+            <p class="title hero-title has-text-centered">
+                Think outside the trash
+            </p>
+            <p class="subtitle hero-subtitle has-text-centered">
+                Giving Made Easy
+            </p>
         </div>
     </section>
 
-    <section class="columns has-background-primary-light has-text-centered">
-        <div class="column is-4 is-offset-1">
-            <div class="box">
-                <h1 class="title">SEARCH</h1>
+    <section>
+        <div class="has-background-white has-text-centered p-5">
+            <h1 class="title title-charity is-narrow has-text-centered " id="team">Find A Charity</h1>
+            <h2 class="subtitle p-1">Dispose of your unwanted item and help the community in the process.</h2>
+        </div>
+    </section>
+
+    <section class="columns has-background-white has-text-centered pt-3 pb-3">
+        <div class="column is-3 is-offset-1" id="search-div">
+            <div class="box box-new">
                 <form action="">
                     <div class="field control has-icons-left">
                         <input class="input is-primary" type="text" placeholder="Postcode" id="postcode">
@@ -109,67 +98,90 @@
                 <div id="list-group"></div>
             </div>
         </div>
-        <div class="column is-6">
-            <div class="box">
-                <h1 class="title">MAP</h1>
+        <div class="column is-7" id="map-div">
+            <div class="box box-new">
                 <div id="map"></div>
             </div>
         </div>
     </section>
 
+    <section class="columns has-background-dark p-5">
+        <div class="column is-8 is-offset-2">
+            <div>
+                <h1 class="title has-text-centered has-text-white" id="about">ABOUT</h1>
+                <h4 class="title has-text-centered has-text-white">An Innovative Method To Charitable Giving</h4>
+                <p class="has-text-white has-text-centered">Available on all devices, Gift provides suggestions for
+                    nearby not-for-profits and charities in need of items users no longer need. Users simply upload
+                    their unwanted or items to be donated and Gifta provides real time solutions – making disposal
+                    sustainable and ethical whilst reusing items to those in need.
+                </p>
+                <br>
+                <p class="has-text-white has-text-centered">By showing users where to take their donations on a map of
+                    their immediate area, Gifta encourages members of the local community to cultivate sustainable
+                    re-purposing habits. Users are able to input a postcode or select search results generated based on
+                    their location.</p>
+                <br>
+                <p class="has-text-white has-text-centered">Users have the ability to comment on the app to share their
+                    tips and tricks as well as share content from the app to promote their giving, repurposing and
+                    reusing. Importantly, the app will also inform users which items should not be donated and which
+                    items are in demand around their area. </p>
+                <div class="column is-narrow has-text-centered" id="faq">
+                    <a href="./faq.html"><button class="button-faq is-primary-light is-center">
+                            VIEW FAQ
+                        </button></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="columns mt-0 has-background-primary-light has-text-centered pt-3 pb-3">
+        <div class="column is-2 is-offset-3">
+            <div class="box">
+                <figure class="image">
+                    <img class="is-rounded" src="./assets/img/Gifta-reclaim.png" alt="reclaim">
+                </figure>
+                <h1 class="title">Reclaim</h1>
+            </div>
+        </div>
+        <div class="column is-2">
+            <div class="box">
+                <figure class="image">
+                    <img class="is-rounded" src="./assets/img/Gifta-repurpose.png" alt="repurpose">
+                </figure>
+                <h1 class="title">Repurpose</h1>
+            </div>
+        </div>
+        <div class="column is-2">
+            <div class="box">
+                <figure class="image">
+                    <img class="is-rounded" src="./assets/img/Gifta-rejoice.png" alt="rejoice">
+                </figure>
+                <h1 class="title">Rejoice</h1>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="has-background-primary has-text-centered p-5">
+            <h1 class="title is-narrow has-text-centered has-text-white" id="team">TEAM</h1>
+        </div>
+    </section>
+
     <section class="columns has-background-primary">
-        <div class="column is-10 is-offset-1">
+        <div class="column is-4 is-offset-3">
             <div class="box">
-                <h1 class="title" id="about">ABOUT</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet aliquid, repellendus vero harum
-                    voluptatum ab est nobis quas molestiae non nihil sapiente asperiores repudiandae mollitia cum
-                    provident nesciunt, magnam, vel tempore impedit suscipit perspiciatis iste. Est quidem eos corrupti
-                    consequuntur optio temporibus, nemo aut accusantium reiciendis pariatur, nobis consectetur eum.</p>
+                <p>Headquartered in Perth, Western Australia, Kinda Communities was founded by two local Perth students. Having met and studied at the University of Western Australia the pair were driven by the need to access appropriate charities after a number of State and National pandemics and emergencies saw many West Australians wanting to donate to charities but unsure what was needed, what charities accepted certain gifts and ultimately where to donate.
+                </p><br>
+                <p>As two self-appointed humanitarians, they devised an application to assist in a worthy cause and Kinda was created. Gifta was their first app with further applications & clients in the pipeline.
+                </p><br>
+                <p>Kinda Communities is currently welcoming new clients, and are available to assist not-for-profits and local charities in other web development areas.
+                </p>
             </div>
         </div>
-    </section>
-
-    <section class="columns has-background-primary-light">
-        <div class="column is-10 is-offset-1">
-            <div class="box">
-                <h1 class="title" id="faq">FAQ</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo molestiae, sit necessitatibus id
-                    inventore ipsa consequatur asperiores dignissimos animi veniam beatae officiis omnis explicabo
-                    maxime aspernatur deleniti tempora amet quis! Ducimus nesciunt ipsa beatae unde eveniet blanditiis
-                    consequuntur? Laborum optio dolorem necessitatibus ipsum placeat atque nam illum labore ratione
-                    numquam.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, molestiae excepturi! Optio qui,
-                    provident eum et est dolorem odit id?</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="columns has-background-primary">
-        <div class="column is-10 is-offset-1">
-            <div class="box">
-                <h1 class="title" id="team">TEAM</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo molestiae, sit necessitatibus id
-                    inventore ipsa consequatur asperiores dignissimos animi veniam beatae officiis omnis explicabo
-                    maxime aspernatur deleniti tempora amet quis! Ducimus nesciunt ipsa beatae unde eveniet blanditiis
-                    consequuntur? Laborum optio dolorem necessitatibus ipsum placeat atque nam illum labore ratione
-                    numquam.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, molestiae excepturi! Optio qui,
-                    provident eum et est dolorem odit id?</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="columns mb-0 has-background-primary-light">
-        <div class="column is-10 is-offset-1">
-            <div class="box">
-                <h1 class="title" id="contact">CONTACT</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat recusandae molestiae dolore maxime
-                    consequatur commodi. Nam, blanditiis accusantium. Numquam quidem cumque in debitis quae? Quo harum
-                    autem eius consequuntur quaerat est veritatis sed voluptatum reprehenderit velit, cumque numquam ab
-                    officiis nisi dicta deserunt accusamus. Harum fugiat dicta excepturi natus corporis!</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque corporis consectetur consequuntur
-                    repellendus id animi! Tempore, qui at. Omnis id laboriosam dolorum quisquam dolor necessitatibus
-                    ullam placeat vero quibusdam suscipit.</p>
+        <div class="column is-2">
+            <div>
+                <img src="./assets/img/KindaCommunities.png" alt="Kinda Communities">
             </div>
         </div>
     </section>
