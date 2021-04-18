@@ -1,21 +1,71 @@
-//Create the variables
 let map;
-let placesService;
-let infowindow;
-let markers = [];
-const australia = { lat: -25.274, lng: 133.775 };
-let searches = [];
+let markers;
 
 init();
 
 function init() {
-  const searchButton = document.querySelector("#search");
-  searchButton.addEventListener("click", search);
-  //Call on the load history function
+  initMap();
+  $('#search').click(search);
   loadHistory();
   const options = document.querySelectorAll("option");
-  Array.from(options).forEach(function (option){
+  Array.from(options).forEach(function (option) {
     option.value = option.textContent.toLowerCase();
+  });
+}
+
+// function search(onClickEvent) {
+//   onClickEvent.preventDefault();
+//   const postcodeInput = document.querySelector("#postcode");
+//   const selectedItemName = document.querySelector("#select").value.toLowerCase();
+//   if (postcodeInput.value) {
+//     const postcode = postcodeInput.value;
+//     if (!postcodes.includes(postcode)) {
+//       // FIX THIS
+//       alert("Please enter a valid postcode");
+//       return;
+//     }
+//     getLocationAndSearch(postcode);
+//   } else {
+//     searchForCharitiesAcceptingItem(null);
+//   }
+//   if (selectedItemName === "select your category") return;
+//   UpdateSearchHistory(selectedItemName, postcodeInput.value);
+// }
+
+function search(event) {
+  event.preventDefault();
+  fetch(`https://nominatim.openstreetmap.org/search?q=vinnies&origin=*&countrycodes=au/`,
+    { method: "GET" }
+  ).then(response => {
+    console.log(response);
+  })
+  return;
+  const location = getCoords(-32.278, 115.735);
+  markers.clearMarkers();
+  markers.addMarker(new OpenLayers.Marker(location));
+  map.setCenter(location);
+}
+
+function initMap() {
+  const australia = ol.proj.fromLonLat([133.775, -25.274]);
+  const defaultZoom = 4;
+  var map = new ol.Map({
+    target: 'map',
+    layers: [
+      new ol.layer.Tile({
+        source: new ol.source.OSM()
+      })//,
+      // new ol.layer.Vector({
+      //   source: new ol.source.Vector({
+      //     format: new ol.format.GeoJSON(),
+      //     url: './data/countries.json'
+      //   })
+      // })
+    ],
+    view: new ol.View({
+      center: australia,
+      zoom: defaultZoom
+    })
   });
 }
 
@@ -29,26 +79,6 @@ function loadHistory() {
     let itemName = search.itemName;
     createPreviousSearchButton(postcode, itemName);
   });
-}
-
-function search(onClickEvent) {
-  onClickEvent.preventDefault();
-  clearMarkers();
-  const postcodeInput = document.querySelector("#postcode");
-  const selectedItemName = document.querySelector("#select").value.toLowerCase();
-  if (postcodeInput.value) {
-    const postcode = postcodeInput.value;
-    if (!postcodes.includes(postcode)) {
-      // FIX THIS
-      alert("Please enter a valid postcode");
-      return;
-    }
-    getLocationAndSearch(postcode);
-  } else {
-    searchForCharitiesAcceptingItem(null);
-  }
-  if (selectedItemName === "select your category") return;
-  UpdateSearchHistory(selectedItemName, postcodeInput.value);
 }
 
 function UpdateSearchHistory(selectedItemName, postcodeInputValue) {
@@ -101,34 +131,9 @@ function createPreviousSearchButton(postcodeInputValue, selectedItemName) {
   searchHistory.append($button);
 }
 
-//Renders the map to the page with a default position with the center of Australia displayed
-function initMap() {
-  infowindow = new google.maps.InfoWindow();
-  map = new google.maps.Map(document.getElementById("map"), {
-    center: australia,
-    zoom: 4,
-  });
-}
-
 function getLocationAndSearch(postcode) {
-  const placesServiceRequest = {
-    query: "postcode " + postcode + " Australia",
-    fields: ["geometry"],
-    locationBias: australia,
-  };
-  placesService = new google.maps.places.PlacesService(map);
-  placesService.findPlaceFromQuery(
-    placesServiceRequest,
-    (places, responseStatus) => {
-      if (
-        responseStatus === google.maps.places.PlacesServiceStatus.OK &&
-        places
-      ) {
-        const location = places[0].geometry.location.toJSON();
-        searchForCharitiesAcceptingItem(location);
-      }
-    }
-  );
+  const location = postcode;
+  searchForCharitiesAcceptingItem(location);
 }
 
 function searchForCharitiesAcceptingItem(location) {
@@ -140,45 +145,9 @@ function searchForCharitiesAcceptingItem(location) {
     }
   });
   searchTerms.forEach((searchTerm) => {
-    const placesServiceRequest = {
-      query: searchTerm,
-      fields: ["name", "geometry", "formatted_address"],
-    };
-    if (location) {
-      placesServiceRequest.locationBias = location;
-    }
-    placesService = new google.maps.places.PlacesService(map);
-    placesService.findPlaceFromQuery(
-      placesServiceRequest,
-      (places, responseStatus) => {
-        if (
-          responseStatus === google.maps.places.PlacesServiceStatus.OK &&
-          places
-        ) {
-          createMarker(places[0]);
-          // map.setCenter(places[0].geometry.location);
-        }
-      }
-    );
+    createMarker();
   });
 
-  function createMarker(place) {
-    if (!place.geometry || !place.geometry.location) return;
-    const marker = new google.maps.Marker({
-      map,
-      position: place.geometry.location,
-    });
-    google.maps.event.addListener(marker, "click", () => {
-      infowindow.setContent(place.name + ": " + place.formatted_address);
-      infowindow.open(map, marker);
-    });
-    markers.push(marker);
+  function createMarker() {
   }
-}
-
-function clearMarkers() {
-  markers.forEach((marker) => {
-    marker.setMap(null);
-  });
-  markers = [];
 }
