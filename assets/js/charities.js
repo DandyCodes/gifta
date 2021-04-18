@@ -66,6 +66,147 @@ const charities = [
       wiki: ""
     },
     {
+      name: "Parkerville Children and Youth Care",
+      searchTerm: "Parkerville",
+      items: [
+        "toys",
+        "computers & accessories",
+      ],
+      wiki: ""
+    },
+    {
+      name: "Zonta House Refuge Association",
+      searchTerm: "Zonta House Refuge",
+      items: [
+        "blankets",
+        "clothes",
+      ],
+      wiki: ""
+    },
+    {
+      name: "St Patrick's Community Support Centre Limited",
+      searchTerm: "St Patrick's Community Support Centre",
+      items: [
+        "blankets",
+        "clothes",
+      ],
+      wiki: ""
+    },
+    {
+      name: "People Who Care",
+      searchTerm: "People Who Care",
+      items: [
+        "blankets",
+        "clothes",
+        "furniture",
+      ],
+      wiki: ""
+    },
+    {
+      name: "Save the Children Australia",
+      searchTerm: "Save the Children",
+      items: [
+        "blankets",
+        "clothes",
+        "toys",
+        "books",
+        "furniture",
+        "homewares",
+      ],
+      wiki: "Save the Children Australia"
+    },
+    {
+      name: "Lifeline (crisis support service)",
+      searchTerm: "Lifeline",
+      items: [
+        "furniture",
+        "applicances",
+        "homewares",
+        "books",
+      ],
+      wiki: "Lifeline (crisis support service)"
+    },
+    {
+      name: "Dress for success",
+      searchTerm: "Dress for success",
+      items: [
+        "clothes",
+        "handbags",
+        "shoes",
+      ],
+      wiki: ""
+    },
+    {
+      name: "Friends with Dignity",
+      searchTerm: "Friends with Dignity",
+      items: [
+        "furniture",
+        "applicances",
+        "homewares",
+      ],
+      wiki: ""
+    },
+    {
+      name: "Anglicare",
+      searchTerm: "Anglicare",
+      items: [
+        "furniture",
+        "clothes",
+        "toys",
+        "books",
+        "applicances",
+        "homewares",
+      ],
+      wiki: "Anglicare"
+    },
+    {
+      name: "Australian Red Cross",
+      searchTerm: "Redcross",
+      items: [
+        "shoes",
+        "clothes",
+        "handbags",
+      ],
+      wiki: "Australian Red Cross"
+    },
+    {
+      name: "Armadale Community Rescue Group Op Shop",
+      searchTerm: "Armadale Community Rescue Group Op Shop",
+      items: [
+        "furniture",
+        "clothes",
+        "toys",
+        "books",
+        "homewares",
+      ],
+      wiki: " "
+    },
+    {
+      name: "Children In Need Inc.",
+      searchTerm: "Children In Need Inc.",
+      items: [
+        "computers & accessories",
+      ],
+      wiki: " "
+    },
+    {
+      name: "PCs For Kids",
+      searchTerm: "PCs For Kids",
+      items: [
+        "computers & accessories",
+      ],
+      wiki: " "
+    },
+    {
+      name: "PetRescue",
+      searchTerm: "PetRescue",
+      items: [
+        "blankets",
+        "toys",
+      ],
+      wiki: " "
+    },
+    {
       name: "Good Samaritan Industries",
       searchTerm: "Good Sammy",
       items: [
