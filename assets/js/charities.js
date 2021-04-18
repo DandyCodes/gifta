@@ -1,6 +1,6 @@
 const charities = [
     {
-      name: "St Vincent de Paul Society",
+      name: "Society of Saint Vincent de Paul",
       searchTerm: "Vinnies",
       items: [
         "shoes",
@@ -13,10 +13,10 @@ const charities = [
         "linen",
         "towels",
       ],
-      wiki: "https://en.wikipedia.org/wiki/Society_of_Saint_Vincent_de_Paul"
+      wiki: "Society of Saint Vincent de Paul"
     },
     {
-      name: "The Salvation Army Australia",
+      name: "The Salvation Army in Australia",
       searchTerm: "Salvos",
       items: [
         "shoes",
@@ -29,7 +29,7 @@ const charities = [
         "linen",
         "towels",
       ],
-      wiki: ""
+      wiki: "The Salvation Army in Australia"
     },
     {
       name: "Technology for Ageing & Disability WA",
@@ -50,6 +50,15 @@ const charities = [
     {
       name: "Dogs' Refuge Home",
       searchTerm: "Dogs Refuge Home",
+      items: [
+        "blankets",
+        "towels",
+      ],
+      wiki: ""
+    },
+    {
+      name: "Cat Haven",
+      searchTerm: "Cat Haven",
       items: [
         "blankets",
         "towels",

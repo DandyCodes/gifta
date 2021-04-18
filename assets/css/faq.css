@@ -1,0 +1,21 @@
+#wiki-box {
+  height: 30rem;
+  overflow: scroll;
+  background-color: white;
+}
+
+.header-image-2 {
+  background-image: url("../img/FAQhero.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: #999;
+  background-size: cover;
+}
+
+#hero-image-faq{
+    height: 50vh;
+}
+
+#wiki-box p{
+    font-size: 1rem;
+}
