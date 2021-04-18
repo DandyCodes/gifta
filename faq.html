@@ -6,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/jpg" href="./assets/img/favicon.ico" />
-    <link rel="stylesheet" href="./assets/css/mystyles.css">
     <link rel="stylesheet" href="./assets/css/styles.css">
     <link rel="stylesheet" href="./assets/css/faq.css">
+    <link rel="stylesheet" href="./assets/css/myfaqstyles.css">
     <title>Frequently Asked Questions</title>
     <script src="./assets/js/postcodes.js" defer></script>
     <script src="./assets/js/charities.js" defer></script>
@@ -16,24 +16,23 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
 
-<body>
-    <nav class="navbar has-background-primary-white is-spaced" role="navigation" aria-label="main navigation">
+<body class="has-background-primary-light">
+    <nav class="navbar is-spaced" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <a class="navbar-item-image" href="index.html">
             </a>
         </div>
-        <div id="navbarBasicExample" class="navbar-menu">
-            <div class="navbar-end">
-                <a class="navbar-item has-text-primary" href="./index.html#about">
-                    ABOUT
-                </a>
-                <a class="navbar-item has-text-primary" href="./faq.html">
-                    FAQ
-                </a>
-                <a class="navbar-item has-text-primary" href="./index.html#contact">
-                    CONTACT
-                </a>
-            </div>
+        <div class="navbar-end">
+            <a class="navbar-item has-text-primary" href="./index.html#about">
+                ABOUT
+            </a>
+            <a class="navbar-item has-text-primary" href="./faq.html">
+                FAQ
+            </a>
+            <a class="navbar-item has-text-primary" href="./index.html#contact">
+                CONTACT
+            </a>
+        </div>
     </nav>
 
     <section class="hero is-large is-info" id="hero-image">
@@ -41,11 +40,11 @@
         </div>
     </section>
 
-    <section class="columns p-5">
-        <div class="column is-8 is-offset-2">
+    <section class="faq-section">
+        <div>
             <div>
-                <h1 class="title has-text-centered" id="about">Frequently Asked Questions</h1>
-                <h3 class="title">What can I not donate?</h3>
+                <h1>Frequently Asked Questions</h1>
+                <h3>What can I not donate?</h3>
                 <p>Each charity has slightly different regulations around what items can or cannot be donated. Please refer to the individual charity websites.<br><br>
                     General guide for what cannot be donated:
                 </p>
@@ -58,13 +57,13 @@
         </div>
     </section>
 
-    <section class="columns">
+    <section class="faq-section" id="charity-info">
         <div class="column is-3 is-offset-1" id="charity-buttons">
         </div>
         <div class="column is-7" id="wiki-box"></div>
     </section>
 
-    <footer class="footer has-background-dark pt-3 pb-3">
+    <footer class="has-background-dark">
         <div class="container">
             <div class="content has-text-centered has-text-white">
                 <p>

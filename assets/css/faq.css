@@ -1,5 +1,21 @@
+body {
+  margin: 0;
+}
+
+#charity-info {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  gap: 1rem;
+}
+
+.faq-section {
+  padding: 1rem;
+}
+
 #wiki-box {
+  border: solid black thin;
   height: 30rem;
+  padding: 1rem;
   overflow: scroll;
   background-color: white;
 }
@@ -17,5 +33,11 @@
 }
 
 #wiki-box p{
-    font-size: 1rem;
+  font-size: 1rem;
+}
+
+footer {
+  padding: 0.1rem 0rem;
+  color: white;
+  text-align: center;
 }
