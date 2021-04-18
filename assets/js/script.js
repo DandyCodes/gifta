@@ -20,6 +20,7 @@ function init() {
   const requestURL = "https://www.wikipedia.org/w/api.php?action=parse&page=Pet_door&prop=text&formatversion=2";
   fetch(requestURL, {method: "GET"})
   .then(response => {
+    console.log("version1");
     console.log(response);
   })
 }
