@@ -17,7 +17,7 @@ function init() {
   Array.from(options).forEach(function (option){
     option.value = option.textContent.toLowerCase();
   });
-  const requestURL = "https://www.wikipedia.org/w/api.php?action=parse&page=Pet_door&prop=text&formatversion=2";
+  const requestURL = "https://en.wikipedia.org/w/api.php?action=parse&page=Pet_door&prop=text&formatversion=2";
   console.log("version1");
   fetch(requestURL, {method: "GET"})
   .then(response => {
