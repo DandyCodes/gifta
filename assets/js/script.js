@@ -64,10 +64,14 @@ function saveSearchToLocalStorage(postcodeInputValue, selectedItemName) {
 //--added by SP
 function createPreviousSearchButton(postcodeInputValue, selectedItemName) {
   var searchHistory = $("#list-group");
-  let button = $(
+  let $button = $(
     `<button data-postcode="${postcodeInputValue}" data-item="${selectedItemName}">${postcodeInputValue} - ${selectedItemName}</button>`
   );
-  button.click(function (e) {
+  $button.addClass("button")
+  $button[0].style.display = "inline-flex";
+  $button[0].style.alignItems = "center";
+  $button.append($('<button class="delete"></button>'));
+  $button.click(function (e) {
     const postcode = this.dataset.postcode;
     const itemName = this.dataset.item;
     const postcodeInput = document.querySelector("#postcode");
@@ -75,7 +79,7 @@ function createPreviousSearchButton(postcodeInputValue, selectedItemName) {
     postcodeInput.value = postcode;
     selectInput.value = itemName;
   });
-  searchHistory.append(button);
+  searchHistory.append($button);
 }
 
 //Renders the map to the page with a default position with the center of Australia displayed
