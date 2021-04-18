@@ -179,7 +179,7 @@ const charities = [
         "books",
         "homewares",
       ],
-      wiki: " "
+      wiki: ""
     },
     {
       name: "Children In Need Inc.",
@@ -187,7 +187,7 @@ const charities = [
       items: [
         "computers & accessories",
       ],
-      wiki: " "
+      wiki: ""
     },
     {
       name: "PCs For Kids",
@@ -195,7 +195,7 @@ const charities = [
       items: [
         "computers & accessories",
       ],
-      wiki: " "
+      wiki: ""
     },
     {
       name: "PetRescue",
@@ -204,7 +204,7 @@ const charities = [
         "blankets",
         "toys",
       ],
-      wiki: " "
+      wiki: ""
     },
     {
       name: "Good Samaritan Industries",
