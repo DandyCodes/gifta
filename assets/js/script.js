@@ -17,11 +17,15 @@ function init() {
   Array.from(options).forEach(function (option){
     option.value = option.textContent.toLowerCase();
   });
-  const requestURL = "https://en.wikipedia.org/w/api.php?action=parse&page=Pet_door&prop=text&formatversion=2";
-  console.log("version1");
+  const requestURL = "https://en.wikipedia.org/w/api.php?action=parse&origin=*&page=Society of Saint Vincent de Paul&prop=text&format=json&formatversion=2";
   fetch(requestURL, {method: "GET"})
   .then(response => {
-    console.log(response);
+    return response.json();
+  }).then(obj => {
+    const $element = $(obj.parse.text);
+    $element[0].style.backgroundColor = "white";
+    $element[0].style.maxHeight = "20rem";
+    $('body').append($element);
   })
 }
 
