@@ -86,6 +86,14 @@ function createPreviousSearchButton(postcodeInputValue, selectedItemName) {
   $delete.click(function (event) {
     event.stopPropagation();
     const parent = this.closest('.button');
+    const postcode = parent.dataset.postcode;
+    const item = parent.dataset.item;
+    searches.forEach((search, index) => {
+      if (search.postcode === postcode && search.itemName === item){
+        searches.splice(index, 1)
+      }
+    });
+    localStorage.setItem("searches", JSON.stringify(searches));
     parent.remove();
   })
   $button.append($delete);
