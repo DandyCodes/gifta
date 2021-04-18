@@ -14,7 +14,7 @@ function init() {
   //Call on the load history function
   loadHistory();
   const options = document.querySelectorAll("option");
-  Array.from(options).forEach(function (option){
+  Array.from(options).forEach(function (option) {
     option.value = option.textContent.toLowerCase();
   });
 }
@@ -39,8 +39,7 @@ function search(onClickEvent) {
   if (postcodeInput.value) {
     const postcode = postcodeInput.value;
     if (!postcodes.includes(postcode)) {
-      // FIX THIS
-      alert("Please enter a valid postcode");
+      postcodeInput.value = "Invalid postcode";
       return;
     }
     getLocationAndSearch(postcode);
@@ -89,7 +88,7 @@ function createPreviousSearchButton(postcodeInputValue, selectedItemName) {
     const postcode = parent.dataset.postcode;
     const item = parent.dataset.item;
     searches.forEach((search, index) => {
-      if (search.postcode === postcode && search.itemName === item){
+      if (search.postcode === postcode && search.itemName === item) {
         searches.splice(index, 1)
       }
     });
@@ -154,7 +153,13 @@ function searchForCharitiesAcceptingItem(location) {
     };
     if (location) {
       placesServiceRequest.locationBias = location;
+      map.setCenter(location);
+      map.setZoom(8);
     }
+    else {
+      geolocateMapCenter();
+    }
+
     placesService = new google.maps.places.PlacesService(map);
     placesService.findPlaceFromQuery(
       placesServiceRequest,
@@ -181,6 +186,28 @@ function searchForCharitiesAcceptingItem(location) {
       infowindow.open(map, marker);
     });
     markers.push(marker);
+  }
+}
+
+function geolocateMapCenter() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+        map.setCenter(pos);
+        map.setZoom(8);
+      },
+      () => {
+        map.setCenter(australia);
+        map.setZoom(4);
+      }
+    );
+  } else {
+    map.setCenter(australia);
+    map.setZoom(4);
   }
 }
 
