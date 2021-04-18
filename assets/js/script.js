@@ -18,9 +18,9 @@ function init() {
     option.value = option.textContent.toLowerCase();
   });
   const requestURL = "https://www.wikipedia.org/w/api.php?action=parse&page=Pet_door&prop=text&formatversion=2";
+  console.log("version1");
   fetch(requestURL, {method: "GET"})
   .then(response => {
-    console.log("version1");
     console.log(response);
   })
 }
