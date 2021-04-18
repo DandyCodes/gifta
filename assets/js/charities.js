@@ -12,7 +12,8 @@ const charities = [
         "appliances",
         "linen",
         "towels",
-      ]
+      ],
+      wiki: "https://en.wikipedia.org/wiki/Society_of_Saint_Vincent_de_Paul"
     },
     {
       name: "The Salvation Army Australia",
@@ -27,21 +28,24 @@ const charities = [
         "appliances",
         "linen",
         "towels",
-      ]
+      ],
+      wiki: ""
     },
     {
       name: "Technology for Ageing & Disability WA",
       searchTerm: "TADWA",
       items: [
         "computers & accessories",
-      ]
+      ],
+      wiki: ""
     },
     {
       name: "Bicycles for Humanity Western Australia",
       searchTerm: "Bicycles for Humanity Western Australia",
       items: [
         "bikes",
-      ]
+      ],
+      wiki: ""
     },
     {
       name: "Dogs' Refuge Home",
@@ -49,7 +53,8 @@ const charities = [
       items: [
         "blankets",
         "towels",
-      ]
+      ],
+      wiki: ""
     },
     {
       name: "Good Samaritan Industries",
@@ -65,6 +70,7 @@ const charities = [
         "linen",
         "towels",
         "furniture",
-      ]
+      ],
+      wiki: ""
     }
   ]

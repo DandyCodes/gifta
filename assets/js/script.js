@@ -17,6 +17,11 @@ function init() {
   Array.from(options).forEach(function (option){
     option.value = option.textContent.toLowerCase();
   });
+  const requestURL = "https://www.wikipedia.org/w/api.php?action=parse&page=Pet_door&prop=text&formatversion=2";
+  fetch(requestURL)
+  .then(response => {
+    console.log(response);
+  })
 }
 
 function loadHistory() {
