@@ -1,5 +1,5 @@
+let popup;
 let map;
-let markers;
 
 init();
 
@@ -7,66 +7,65 @@ function init() {
   initMap();
   $('#search').click(search);
   loadHistory();
-  const options = document.querySelectorAll("option");
-  Array.from(options).forEach(function (option) {
-    option.value = option.textContent.toLowerCase();
+  Array.from($('option')).forEach($option => {
+    $option.value = $option.textContent.toLowerCase();
   });
 }
 
-// function search(onClickEvent) {
-//   onClickEvent.preventDefault();
-//   const postcodeInput = document.querySelector("#postcode");
-//   const selectedItemName = document.querySelector("#select").value.toLowerCase();
-//   if (postcodeInput.value) {
-//     const postcode = postcodeInput.value;
-//     if (!postcodes.includes(postcode)) {
-//       // FIX THIS
-//       alert("Please enter a valid postcode");
-//       return;
-//     }
-//     getLocationAndSearch(postcode);
-//   } else {
-//     searchForCharitiesAcceptingItem(null);
-//   }
-//   if (selectedItemName === "select your category") return;
-//   UpdateSearchHistory(selectedItemName, postcodeInput.value);
-// }
+function initMap(popup) {
+  popup = new ol.Overlay({
+    element: $('#popup')[0],
+    autoPan: true,
+    autoPanAnimation: {
+      duration: 240,
+    },
+  });
+  map = new ol.Map({
+    target: 'map',
+    layers: [new ol.layer.Tile({
+      source: new ol.source.OSM(),
+    }),
+    new ol.layer.Vector({
+      source: new ol.source.Vector({
+        features: []
+      }),
+      style: new ol.style.Style({
+        image: new ol.style.Icon({
+          scale: 0.75,
+          src: 'https://openlayers.org/en/latest/examples/data/icon.png'
+        }),
+      })
+    })],
+    overlays: [popup],
+    view: new ol.View({
+      center: ol.proj.fromLonLat([133.775, -25.274]),
+      zoom: 4
+    })
+  });
+
+  $('#popup-closer').click(_ => {
+    popup.setPosition(undefined);
+  });
+
+  map.on('singleclick', event => {
+    const pixel = map.getEventPixel(event.originalEvent);
+    map.forEachFeatureAtPixel(pixel, feature => {
+      const coordinate = event.coordinate;
+      $('#popup-content').text(feature.values_.description);
+      popup.setPosition(coordinate);
+    });
+  });
+}
 
 function search(event) {
   event.preventDefault();
-  fetch(`https://nominatim.openstreetmap.org/search?q=vinnies&origin=*&countrycodes=au/`,
-    { method: "GET" }
-  ).then(response => {
-    console.log(response);
-  })
-  return;
-  const location = getCoords(-32.278, 115.735);
-  markers.clearMarkers();
-  markers.addMarker(new OpenLayers.Marker(location));
-  map.setCenter(location);
-}
-
-function initMap() {
-  const australia = ol.proj.fromLonLat([133.775, -25.274]);
-  const defaultZoom = 4;
-  var map = new ol.Map({
-    target: 'map',
-    layers: [
-      new ol.layer.Tile({
-        source: new ol.source.OSM()
-      })//,
-      // new ol.layer.Vector({
-      //   source: new ol.source.Vector({
-      //     format: new ol.format.GeoJSON(),
-      //     url: './data/countries.json'
-      //   })
-      // })
-    ],
-    view: new ol.View({
-      center: australia,
-      zoom: defaultZoom
-    })
-  });
+  clearFeatures();
+  const $postcodeInput = $('#postcode');
+  if (postcodes.includes($postcodeInput.val())) {
+    getPostcodeLocationAndGetBoundingBoxAndSearch($postcodeInput.val());
+    return;
+  }
+  geolocateAndGetBoundingBoxAndSearch();
 }
 
 function loadHistory() {
@@ -131,12 +130,33 @@ function createPreviousSearchButton(postcodeInputValue, selectedItemName) {
   searchHistory.append($button);
 }
 
-function getLocationAndSearch(postcode) {
-  const location = postcode;
-  searchForCharitiesAcceptingItem(location);
+function getPostcodeLocationAndGetBoundingBoxAndSearch(postcode) {
+  const searchURL = `https://nominatim.openstreetmap.org/search/"${postcode}, Australia"?format=json&addressdetails=1&polygon_svg=1&countrycodes=au/`;
+  fetch(searchURL, { method: "GET" }).then(response => {
+    return response.json();
+  }).then(obj => {
+    const lat = obj[0].lat;
+    const lon = obj[0].lon;
+    getBoudingBoxAndSearch(lat, lon);
+  }).catch(error => {
+    console.log(error);
+  });
 }
 
-function searchForCharitiesAcceptingItem(location) {
+function geolocateAndGetBoundingBoxAndSearch() {
+  const lat = geoplugin_latitude();
+  const lon = geoplugin_longitude();
+  getBoudingBoxAndSearch(lat, lon)
+}
+
+function getBoudingBoxAndSearch(lat, lon) {
+  map.getView().setCenter(ol.proj.fromLonLat([lon, lat]));
+  map.getView().setZoom(10);
+  const boundingbox = [parseFloat(lat) - 1, parseFloat(lat) + 1, parseFloat(lon) - 1, parseFloat(lon) + 1];
+  searchForCharitiesAcceptingItem(boundingbox, lat, lon);
+}
+
+function searchForCharitiesAcceptingItem(boundingbox, lat, lon) {
   let searchTerms = [];
   const item = document.querySelector("#select").value.toLowerCase();
   charities.forEach((charity) => {
@@ -145,9 +165,46 @@ function searchForCharitiesAcceptingItem(location) {
     }
   });
   searchTerms.forEach((searchTerm) => {
-    createMarker();
+    const searchURL = `https://nominatim.openstreetmap.org/search/${searchTerm} near ${lat},${lon}?format=json&addressdetails=1&polygon_svg=1&countrycodes=au&limit=10&bounded=1&viewbox=${boundingbox[3]},${boundingbox[2]},${boundingbox[1]},${boundingbox[0]}/`;
+    fetch(searchURL, { method: "GET" }).then(response => {
+      return response.json();
+    }).then(obj => {
+      obj.forEach(result => {
+        const address = result.address;
+        let name = '';
+        if (address.shop) {
+          name = address.shop;
+        }
+        if (address.place) {
+          name = address.place;
+        }
+        if (address.amenity) {
+          name = address.amenity;
+        }
+        if (address.building) {
+          name = address.building;
+        }
+        let number = '';
+        if (address.house_number) {
+          number = address.house_number;
+        }
+        const fullAddress = `${name}, ${number} ${address.road}, ${address.suburb}, ${address.postcode}, ${address.state}`
+        createFeature(fullAddress, result.lon, result.lat);
+      });
+    }).catch(error => {
+      console.log(error);
+    });
   });
 
-  function createMarker() {
+  function createFeature(fullAddress, lon, lat) {
+    const iconFeature = new ol.Feature({
+      geometry: new ol.geom.Point(ol.proj.fromLonLat([lon, lat])),
+      description: fullAddress,
+    });
+    map.getLayers().array_[1].getSource().addFeature(iconFeature);
   }
+}
+
+function clearFeatures() {
+  map.getLayers().array_[1].getSource().clear();
 }

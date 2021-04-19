@@ -15,6 +15,7 @@
     <script src="./assets/js/charities.js" defer></script>
     <script src="./assets/js/script.js" defer></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/css/ol.css" type="text/css">
+    <script language="JavaScript" src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/build/ol.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
@@ -100,6 +101,10 @@
         <div class="column is-7" id="map-div">
             <div class="box box-new">
                 <div id="map"></div>
+                <div id="popup" class="ol-popup">
+                    <div href="#" id="popup-closer" class="ol-popup-closer"></div>
+                    <div id="popup-content"></div>
+                </div>
             </div>
         </div>
     </section>
