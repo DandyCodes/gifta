@@ -33,7 +33,7 @@ const charities = [
     },
     {
       name: "Technology for Ageing & Disability WA",
-      searchTerm: "TADWA",
+      searchTerm: "Technology for Ageing & Disability WA",
       items: [
         "computers & accessories",
       ],
@@ -112,6 +112,7 @@ const charities = [
         "books",
         "furniture",
         "homewares",
+        "cots",
       ],
       wiki: "Save the Children Australia"
     },
@@ -143,6 +144,7 @@ const charities = [
         "furniture",
         "applicances",
         "homewares",
+        "linen",
       ],
       wiki: ""
     },
@@ -194,6 +196,14 @@ const charities = [
       searchTerm: "PCs For Kids",
       items: [
         "computers & accessories",
+      ],
+      wiki: ""
+    },
+    {
+      name: "Containers for Change",
+      searchTerm: "Containers for Change",
+      items: [
+        "Aluminium, Glass & Plastic",
       ],
       wiki: ""
     },
