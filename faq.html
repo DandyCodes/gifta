@@ -6,73 +6,103 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/jpg" href="./assets/img/favicon.ico" />
-    <link rel="stylesheet" href="./assets/css/mystyles.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
     <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/css/faq.css">
+    <link rel="stylesheet" href="./assets/css/myfaqstyles.css">
     <title>Frequently Asked Questions</title>
     <script src="./assets/js/postcodes.js" defer></script>
     <script src="./assets/js/charities.js" defer></script>
-    <script src="./assets/js/script.js" defer></script>
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBrWndJ08DJDlbszJiaTRd23AZqll06DM&callback=initMap&libraries=places&v=weekly"
-        defer></script>
+    <script src="./assets/js/faq.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
 
-<body>
-    <nav class="navbar has-background-primary-white is-spaced" role="navigation" aria-label="main navigation">
+<body >
+    <nav class="navbar is-spaced" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <a class="navbar-item-image" href="index.html">
             </a>
         </div>
-        <div id="navbarBasicExample" class="navbar-menu">
-            <div class="navbar-end">
-                <a class="navbar-item has-text-primary" href="#about">
-                    ABOUT
-                </a>
-                <a class="navbar-item has-text-primary" href="#faq">
-                    FAQ
-                </a>
-                <a class="navbar-item has-text-primary" href="#team">
-                    TEAM
-                </a>
-                <a class="navbar-item has-text-primary" href="#contact">
-                    CONTACT
-                </a>
-            </div>
+        <div class="navbar-end">
+            <a class="navbar-item has-text-primary" href="./index.html#about">
+                ABOUT
+            </a>
+            <a class="navbar-item has-text-primary" href="./faq.html">
+                FAQ
+            </a>
+            <a class="navbar-item has-text-primary" href="./index.html#contact">
+                CONTACT
+            </a>
+        </div>
     </nav>
 
-    <section class="hero is-large is-info">
-        <div class="hero-body header-image-2">
+    <section class="hero is-large is-info" id="hero-image">
+        <div class="hero-body header-image-2" id="hero-image-faq">
         </div>
     </section>
 
-    <section class="columns p-5">
-        <div class="column is-8 is-offset-2">
+    <section class="faq-section">
+        <div>
             <div>
-                <h1 class="title has-text-centered" id="about">Frequently Asked Questions</h1>
-                <h4 class="title has-text-centered">An Innovative Method To Charitable Giving</h4>
-                <p class="has-text-centered">Available on all devices, Gift provides suggestions for
-                    nearby not-for-profits and charities in need of items users no longer need. Users simply upload
-                    their unwanted or items to be donated and Gifta provides real time solutions – making disposal
-                    sustainable and ethical whilst reusing items to those in need.
-                </p>
-                <br>
-                <p class="has-text-centered">By showing users where to take their donations on a map of
-                    their immediate area, Gifta encourages members of the local community to cultivate sustainable
-                    re-purposing habits. Users are able to input a postcode or select search results generated based on
-                    their location.</p>
-                <br>
-                <p class="has-text-centered">Users have the ability to comment on the app to share their
-                    tips and tricks as well as share content from the app to promote their giving, repurposing and
-                    reusing. Importantly, the app will also inform users which items should not be donated and which
-                    items are in demand around their area. </p>
+                <h1>Frequently Asked Questions</h1>
+                <div>
+                    <h3>What can I not donate?</h3>
+                    <p>Each charity has slightly different regulations around what items can or cannot be donated. Please refer to the individual charity websites.<br><br>
+                        General guide for what cannot be donated:
+                    </p>
+                    <ul>
+                        <li>Ripped, torn, soiled or stained clothing</li>
+                        <li>Broken, ripped or stained furniture</li>
+                        <li>Cracked or broken homewares</li>
+                        <li>Stained bedding including mattresses</li>
+                        <li>Green waste</li>
+                        <li>Household waste</li>
+                        <li>Knives (except table cutlery)</li>
+                        <li>Weapons (including replicas and martial arts weapons)</li>
+                        <li>Taxidermy animals</li>
+                        <li>Batteries</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Do some charities collect?</h3>
+                    <p>Yes, some do. Please refer to the individual charity websites for collection information.
+                    </p>
+                </div>
+                <div>
+                    <h3>Can I donate in store?</h3>
+                    <p>Yes, please refer to the individual charity website of open times.
+                    </p>
+                </div>
+                <div>
+                    <h3>How do charities get listed on Gifta?</h3>
+                    <p>Registered charities can email Kinda Communities via hello@kindacommunities.com.au to enquire about listing on Gifta. <br><br>
+                       Listing on Gifta is free for all approved charities.
+                    </p>
                 </div>
             </div>
         </div>
+        </div>
     </section>
 
+    <section class="has-background-primary-light">
+        <div>
+            <h1>Discover More About The Charities</h1>
+        </div>
+        <div id="charity-info">
+            <div id="charity-buttons">
+            </div>
+            <div id="wiki-box"></div>
+        </div>
+    </section>
+
+    <footer class="has-background-dark">
+        <div>
+            <div>
+                <p>
+                    © Gifta 2021. Made by Kinda Communities.
+                </p>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>
