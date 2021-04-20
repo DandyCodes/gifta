@@ -3,8 +3,10 @@ let map;
 let placesService;
 let infowindow;
 let markers = [];
-const australia = { lat: -25.274, lng: 133.775 };
 let searches = [];
+const startLocation = { lat: -25.274, lng: 133.775 };
+const startZoom = 4;
+const searchResultZoom = startZoom * 3;
 
 init();
 
@@ -16,6 +18,15 @@ function init() {
   const options = document.querySelectorAll("option");
   Array.from(options).forEach(function (option) {
     option.value = option.textContent.toLowerCase();
+  });
+}
+
+//Renders the map to the page with a default position with the center of Australia displayed
+function initMap() {
+  infowindow = new google.maps.InfoWindow();
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: startLocation,
+    zoom: 4,
   });
 }
 
@@ -108,20 +119,11 @@ function createPreviousSearchButton(postcodeInputValue, selectedItemName) {
   searchHistory.append($button);
 }
 
-//Renders the map to the page with a default position with the center of Australia displayed
-function initMap() {
-  infowindow = new google.maps.InfoWindow();
-  map = new google.maps.Map(document.getElementById("map"), {
-    center: australia,
-    zoom: 4,
-  });
-}
-
 function getLocationAndSearch(postcode) {
   const placesServiceRequest = {
     query: "postcode " + postcode + " Australia",
     fields: ["geometry"],
-    locationBias: australia,
+    locationBias: startLocation,
   };
   placesService = new google.maps.places.PlacesService(map);
   placesService.findPlaceFromQuery(
@@ -154,7 +156,7 @@ function searchForCharitiesAcceptingItem(location) {
     if (location) {
       placesServiceRequest.locationBias = location;
       map.setCenter(location);
-      map.setZoom(8);
+      map.setZoom(searchResultZoom);
     }
     else {
       geolocateMapCenter();
@@ -198,16 +200,16 @@ function geolocateMapCenter() {
           lng: position.coords.longitude,
         };
         map.setCenter(pos);
-        map.setZoom(8);
+        map.setZoom(searchResultZoom);
       },
       () => {
-        map.setCenter(australia);
-        map.setZoom(4);
+        map.setCenter(startLocation);
+        map.setZoom(startZoom);
       }
     );
   } else {
-    map.setCenter(australia);
-    map.setZoom(4);
+    map.setCenter(startLocation);
+    map.setZoom(startZoom);
   }
 }
 

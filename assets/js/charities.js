@@ -67,7 +67,7 @@ const charities = [
     },
     {
       name: "Parkerville Children and Youth Care",
-      searchTerm: "Parkerville",
+      searchTerm: "Parkerville Children and Youth Care",
       items: [
         "toys",
         "computers & accessories",
@@ -203,7 +203,7 @@ const charities = [
       name: "Containers for Change",
       searchTerm: "Containers for Change",
       items: [
-        "Aluminium, Glass & Plastic",
+        "aluminium, glass & plastic",
       ],
       wiki: ""
     },
