@@ -16,6 +16,7 @@ The FAQ section provides further information such as which items should not be d
 A link to to Gifta's launch presentation can be found here: https://docs.google.com/presentation/d/1GM2yEJ6o6y_XGO_irJIz2f-Hg8QBwigMBzaGOI47jCA/edit#slide=id.p
  
 ![a screenshot of the deployed website](./assets/img/screenshot.png)
+![another screenshot of the deployed website](./assets/img/screenshot2.png)
 ## Usage
 The deployed website can be viewed here: https://dandycodes.github.io/gifta/
 ## Credits
