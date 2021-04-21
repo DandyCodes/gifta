@@ -74,7 +74,6 @@ function search(clickEvent) {
   if (selectedItemName === "select your category") return;
   const searchTerms = getCharitiesWhichAcceptItem(selectedItemName);
   const postcodeInput = $("#postcode-input")[0];
-  updateSearchHistory(postcodeInput.value, selectedItemName);
   clearMarkers();
   if (postcodeInput.value) {
     if (!postcodes.includes(postcodeInput.value)) {
@@ -86,6 +85,7 @@ function search(clickEvent) {
   else {
     searchForCharitiesAtLocationAndSetMapCenterAndZoom(null, searchTerms);
   }
+  updateSearchHistory(postcodeInput.value, selectedItemName);
 }
 
 function getCharitiesWhichAcceptItem(selectedItemName) {
