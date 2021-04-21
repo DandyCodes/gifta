@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/jpg" href="./assets/img/favicon.ico" />
+    <link rel="shortcut icon" type="image/jpg" href="./assets/img/favicon.ico"/>
     <link rel="stylesheet" href="./assets/css/mystyles.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
@@ -13,7 +13,7 @@
     <title>Gifta</title>
     <script src="./assets/js/postcodes.js" defer></script>
     <script src="./assets/js/charities.js" defer></script>
-    <script src="./assets/js/script.js" defer></script>
+    <script src="./assets/js/index.js" defer></script>
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBrWndJ08DJDlbszJiaTRd23AZqll06DM&callback=initMap&libraries=places&v=weekly"
         defer></script>
@@ -63,14 +63,14 @@
             <div class="box box-new">
                 <form action="">
                     <div class="field control has-icons-left">
-                        <input class="input is-primary" type="text" placeholder="Postcode" id="postcode">
+                        <input class="input is-primary" type="text" placeholder="Postcode" id="postcode-input">
                         <span class="icon is-small is-left">
                             <i class="fas fa-map-marker-alt"></i>
                         </span>
                     </div>
                     <div class="field control">
                         <div class="select is-primary">
-                            <select id="select">
+                            <select id="item-dropdown">
                                 <option value="" disabled selected>Select your category</option>
                                 <option>Any</option>
                                 <option>Shoes</option>
@@ -95,7 +95,7 @@
                     </button>
                     <hr>
                 </form>
-                <div id="list-group"></div>
+                <div id="search-history"></div>
             </div>
         </div>
         <div class="column is-7" id="map-div">

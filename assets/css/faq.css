@@ -17,13 +17,13 @@ body {
   max-width: 70rem;
 }
 
-h1{
-    font-size: 2.5rem;
-    text-align: center;
-    color: #0F6222;
-    margin: 3px;
-    padding: 10px;
-    padding-top: 1.5rem;
+h1 {
+  font-size: 2.5rem;
+  text-align: center;
+  color: #0f6222;
+  margin: 3px;
+  padding: 10px;
+  padding-top: 1.5rem;
 }
 
 #wiki-box {
@@ -42,46 +42,45 @@ h1{
   background-size: cover;
 }
 
-#hero-image-faq{
-    height: 50vh;
+#hero-image-faq {
+  height: 50vh;
 }
 
-#wiki-box p{
+#wiki-box p {
   font-size: 1rem;
 }
 
-button{
-    background-color: white;
-    border-color: #dbdbdb;
-    border-width: 2px;
-    color: #363636;
-    cursor: pointer;
-    justify-content: center;
-    padding-bottom: calc(0.5em - 2px);
-    padding-left: 1em;
-    padding-right: 1em;
-    padding-top: calc(0.5em - 2px);
-    text-align: center;
-    white-space: nowrap;
-    user-select: none;
-    -webkit-appearance: none;
-    border: 2px solid transparent;
-    border-radius: 4px;
-    box-shadow: none;
-    font-size: 1rem;
-    height: 2.5em;
-    line-height: 1.5;
-    position: relative;
-    vertical-align: top;
-    width: 100%;
-    margin: 0.25rem;
-    -webkit-writing-mode: horizontal-tb !important;
-    text-rendering: auto;
-    letter-spacing: normal;
-    word-spacing: normal;
-    text-transform: none;
-    text-indent: 0px;
-    text-shadow: none;
+button {
+  background-color: white;
+  border-color: #dbdbdb;
+  border-width: 2px;
+  color: #363636;
+  cursor: pointer;
+  justify-content: center;
+  padding-bottom: calc(0.5em - 2px);
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: calc(0.5em - 2px);
+  text-align: center;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-appearance: none;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  box-shadow: none;
+  font-size: 1rem;
+  height: 2.5em;
+  line-height: 1.5;
+  position: relative;
+  vertical-align: top;
+  width: 100%;
+  margin: 0.25rem;
+  text-rendering: auto;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
 }
 
 footer {
@@ -89,4 +88,3 @@ footer {
   color: white;
   text-align: center;
 }
-
