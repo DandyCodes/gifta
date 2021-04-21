@@ -73,8 +73,8 @@ function search(clickEvent) {
   const selectedItemName = $("#item-dropdown")[0].value.toLowerCase();
   if (selectedItemName === "select your category") return;
   const searchTerms = getCharitiesWhichAcceptItem(selectedItemName);
-  const postcodeInput = $("#postcode-input")[0];
   clearMarkers();
+  const postcodeInput = $("#postcode-input")[0];
   if (postcodeInput.value) {
     if (!postcodes.includes(postcodeInput.value)) {
       postcodeInput.value = "Invalid postcode";
@@ -96,27 +96,6 @@ function getCharitiesWhichAcceptItem(selectedItemName) {
     }
   });
   return searchTerms;
-}
-
-function updateSearchHistory(postcodeInputValue, selectedItemName) {
-  let alreadyExists = false;
-  searches.forEach(search => {
-    if (search.itemName == selectedItemName && search.postcode == postcodeInputValue) {
-      alreadyExists = true;
-    }
-  });
-  if (alreadyExists) return;
-  createPreviousSearchButton(postcodeInputValue, selectedItemName);
-  saveSearchToLocalStorage(postcodeInputValue, selectedItemName);
-}
-
-function saveSearchToLocalStorage(postcodeInputValue, selectedItemName) {
-  let search = {
-    postcode: postcodeInputValue,
-    itemName: selectedItemName,
-  };
-  searches.push(search);
-  localStorage.setItem("searches", JSON.stringify(searches));
 }
 
 function clearMarkers() {
@@ -204,4 +183,25 @@ function createMarker(place) {
     infowindow.open(map, marker);
   });
   markers.push(marker);
+}
+
+function updateSearchHistory(postcodeInputValue, selectedItemName) {
+  let alreadyExists = false;
+  searches.forEach(search => {
+    if (search.itemName == selectedItemName && search.postcode == postcodeInputValue) {
+      alreadyExists = true;
+    }
+  });
+  if (alreadyExists) return;
+  createPreviousSearchButton(postcodeInputValue, selectedItemName);
+  saveSearchToLocalStorage(postcodeInputValue, selectedItemName);
+}
+
+function saveSearchToLocalStorage(postcodeInputValue, selectedItemName) {
+  let search = {
+    postcode: postcodeInputValue,
+    itemName: selectedItemName,
+  };
+  searches.push(search);
+  localStorage.setItem("searches", JSON.stringify(searches));
 }
