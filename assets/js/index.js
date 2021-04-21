@@ -73,8 +73,9 @@ function search(clickEvent) {
   const selectedItemName = $("#item-dropdown")[0].value.toLowerCase();
   if (selectedItemName === "select your category") return;
   const searchTerms = getCharitiesWhichAcceptItem(selectedItemName);
-  clearMarkers();
   const postcodeInput = $("#postcode-input")[0];
+  updateSearchHistory(postcodeInput.value, selectedItemName);
+  clearMarkers();
   if (postcodeInput.value) {
     if (!postcodes.includes(postcodeInput.value)) {
       postcodeInput.value = "Invalid postcode";
@@ -83,9 +84,8 @@ function search(clickEvent) {
     getPostcodeLocationAndSearch(postcodeInput.value, searchTerms);
   }
   else {
-    searchForCharitiesAtLocation(null, searchTerms);
+    searchForCharitiesAtLocationAndSetMapCenterAndZoom(null, searchTerms);
   }
-  updateSearchHistory(postcodeInput.value, selectedItemName);
 }
 
 function getCharitiesWhichAcceptItem(selectedItemName) {
@@ -96,6 +96,27 @@ function getCharitiesWhichAcceptItem(selectedItemName) {
     }
   });
   return searchTerms;
+}
+
+function updateSearchHistory(postcodeInputValue, selectedItemName) {
+  let alreadyExists = false;
+  searches.forEach(search => {
+    if (search.itemName == selectedItemName && search.postcode == postcodeInputValue) {
+      alreadyExists = true;
+    }
+  });
+  if (alreadyExists) return;
+  createPreviousSearchButton(postcodeInputValue, selectedItemName);
+  saveSearchToLocalStorage(postcodeInputValue, selectedItemName);
+}
+
+function saveSearchToLocalStorage(postcodeInputValue, selectedItemName) {
+  let search = {
+    postcode: postcodeInputValue,
+    itemName: selectedItemName,
+  };
+  searches.push(search);
+  localStorage.setItem("searches", JSON.stringify(searches));
 }
 
 function clearMarkers() {
@@ -115,13 +136,19 @@ function getPostcodeLocationAndSearch(postcode, searchTerms) {
   placesService.findPlaceFromQuery(placesServiceRequest, (places, responseStatus) => {
     if (responseStatus === google.maps.places.PlacesServiceStatus.OK && places) {
       const location = places[0].geometry.location.toJSON();
-      searchForCharitiesAtLocation(location, searchTerms);
+      searchForCharitiesAtLocationAndSetMapCenterAndZoom(location, searchTerms);
     }
   }
   );
 }
 
-function searchForCharitiesAtLocation(location, searchTerms) {
+function searchForCharitiesAtLocationAndSetMapCenterAndZoom(location, searchTerms) {
+  if (location) {
+    setMapCenterAndZoom(location, searchResultZoom);
+  }
+  else {
+    findLocationAndSetMapCenterAndZoom();
+  }
   searchTerms.forEach(searchTerm => {
     const placesServiceRequest = {
       query: searchTerm,
@@ -130,34 +157,6 @@ function searchForCharitiesAtLocation(location, searchTerms) {
     };
     findAndMarkPlace(placesServiceRequest);
   });
-  if (location) {
-    setMapCenterAndZoom(location, searchResultZoom);
-  }
-  else {
-    findLocationAndSetMapCenterAndZoom();
-  }
-}
-
-function findAndMarkPlace(placesServiceRequest) {
-  const placesService = new google.maps.places.PlacesService(map);
-  placesService.findPlaceFromQuery(placesServiceRequest, (places, responseStatus) => {
-    if (responseStatus === google.maps.places.PlacesServiceStatus.OK && places) {
-      createMarker(places[0]);
-    }
-  });
-}
-
-function createMarker(place) {
-  if (!place.geometry || !place.geometry.location) return;
-  const marker = new google.maps.Marker({
-    map,
-    position: place.geometry.location,
-  });
-  google.maps.event.addListener(marker, "click", _ => {
-    infowindow.setContent(`${place.name}: ${place.formatted_address}`);
-    infowindow.open(map, marker);
-  });
-  markers.push(marker);
 }
 
 function setMapCenterAndZoom(center, zoom) {
@@ -185,23 +184,24 @@ function findLocationAndSetMapCenterAndZoom() {
   }
 }
 
-function updateSearchHistory(postcodeInputValue, selectedItemName) {
-  let alreadyExists = false;
-  searches.forEach(search => {
-    if (search.itemName == selectedItemName && search.postcode == postcodeInputValue) {
-      alreadyExists = true;
+function findAndMarkPlace(placesServiceRequest) {
+  const placesService = new google.maps.places.PlacesService(map);
+  placesService.findPlaceFromQuery(placesServiceRequest, (places, responseStatus) => {
+    if (responseStatus === google.maps.places.PlacesServiceStatus.OK && places) {
+      createMarker(places[0]);
     }
   });
-  if (alreadyExists) return;
-  createPreviousSearchButton(postcodeInputValue, selectedItemName);
-  saveSearchToLocalStorage(postcodeInputValue, selectedItemName);
 }
 
-function saveSearchToLocalStorage(postcodeInputValue, selectedItemName) {
-  let search = {
-    postcode: postcodeInputValue,
-    itemName: selectedItemName,
-  };
-  searches.push(search);
-  localStorage.setItem("searches", JSON.stringify(searches));
+function createMarker(place) {
+  if (!place.geometry || !place.geometry.location) return;
+  const marker = new google.maps.Marker({
+    map,
+    position: place.geometry.location,
+  });
+  google.maps.event.addListener(marker, "click", _ => {
+    infowindow.setContent(`${place.name}: ${place.formatted_address}`);
+    infowindow.open(map, marker);
+  });
+  markers.push(marker);
 }
