@@ -8,7 +8,7 @@ Gifta uses the *MediaWiki* API to fetch articles about charities from Wikipedia.
 
 Gifta uses the *jQuery* and *Bulma* to achieve a clean, polished and responsive UI.
 
-When the user selects and item, a list of charities is checked to see whether they can accept that item.
+When the user selects an item, a list of charities is checked to see whether they can accept that item.
 Gifta then places all charities which match this criteria into a google maps API call.
 The results are then displayed as markers on a map which can be clicked on to display the name and address of each charity.
 The FAQ section provides further information such as which items should not be donated. Additionally, it dynamically fetches each charity's Wikipedia article (if it exists) so that it can be viewed without having to leave Gifta.
