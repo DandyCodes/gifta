@@ -1,107 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/jpg" href="./assets/img/favicon.ico"/>
+    <link rel="shortcut icon" type="image/jpg" href="./assets/img/favicon.ico">
     <link rel="stylesheet" href="./assets/css/styles.css">
-    <link rel="stylesheet" href="./assets/css/faq.css">
-    <link rel="stylesheet" href="./assets/css/myfaqstyles.css">
     <title>Frequently Asked Questions</title>
     <script src="./assets/js/charities.js" defer></script>
     <script src="./assets/js/faq.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
-
-<body >
-    <nav class="navbar is-spaced" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-            <a class="navbar-item-image" href="index.html">
-            </a>
-        </div>
-        <div class="navbar-end">
-            <a class="navbar-item has-text-primary" href="./index.html#about">
-                ABOUT
-            </a>
-            <a class="navbar-item has-text-primary" href="./faq.html">
-                FAQ
-            </a>
-            <a class="navbar-item has-text-primary" href="./index.html#contact">
-                CONTACT
-            </a>
-        </div>
-    </nav>
-
-    <section class="hero is-large is-info" id="hero-image">
-        <div class="hero-body header-image-2" id="hero-image-faq">
-        </div>
-    </section>
-
-    <section class="faq-section">
-        <div>
-            <div>
-                <h1>Frequently Asked Questions</h1>
-                <div>
-                    <h3>What can I not donate?</h3>
-                    <p>Each charity has slightly different regulations around what items can or cannot be donated. Please refer to the individual charity websites.<br><br>
-                        General guide for what cannot be donated:
-                    </p>
-                    <ul>
-                        <li>Ripped, torn, soiled or stained clothing</li>
-                        <li>Broken, ripped or stained furniture</li>
-                        <li>Cracked or broken homewares</li>
-                        <li>Stained bedding including mattresses</li>
-                        <li>Green waste</li>
-                        <li>Household waste</li>
-                        <li>Knives (except table cutlery)</li>
-                        <li>Weapons (including replicas and martial arts weapons)</li>
-                        <li>Taxidermy animals</li>
-                        <li>Batteries</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>Do some charities collect?</h3>
-                    <p>Yes, some do. Please refer to the individual charity websites for collection information.
-                    </p>
-                </div>
-                <div>
-                    <h3>Can I donate in store?</h3>
-                    <p>Yes, please refer to the individual charity website of open times.
-                    </p>
-                </div>
-                <div>
-                    <h3>How do charities get listed on Gifta?</h3>
-                    <p>Registered charities can email Kinda Communities via hello@kindacommunities.com.au to enquire about listing on Gifta. <br><br>
-                       Listing on Gifta is free for all approved charities.
-                    </p>
+<body>
+    <header>
+        <nav class="navbar is-spaced" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="logo" href="./index.html">
+                    <img src="./assets/img/Gifta-logo-green.png">
+                </a>
+                
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+            <div id="navbarBasicExample" class="navbar-menu">
+                <div class="navbar-end">
+                    <a class="navbar-item" href="./index.html#about"> ABOUT </a>
+                    <a class="navbar-item" href="./faq.html"> FAQ </a>
+                    <a class="navbar-item" href="./index.html#contact"> CONTACT </a>
                 </div>
             </div>
+        </nav>
+        <div class="hero is-large" id="faq-hero">
+            <div class="hero-body"></div>
         </div>
-        </div>
-    </section>
+    </header>
 
-    <section class="has-background-primary-light">
-        <div>
-            <h1>Discover More About The Charities</h1>
+    <article class="content">
+        <p class="title-charity">Frequently Asked Questions</p>
+        <section>
+            <h3>What can I not donate?</h3>
+            <p>
+            Each charity has slightly different regulations around what items can
+            or cannot be donated. Please refer to the individual charity websites.
+            </p>
+            <p>General guide for what cannot be donated:</p>
+            <ul class>
+            <li>Ripped, torn, soiled or stained clothing</li>
+            <li>Broken, ripped or stained furniture</li>
+            <li>Cracked or broken homewares</li>
+            <li>Stained bedding including mattresses</li>
+            <li>Green waste</li>
+            <li>Household waste</li>
+            <li>Knives (except table cutlery)</li>
+            <li>Weapons (including replicas and martial arts weapons)</li>
+            <li>Taxidermy animals</li>
+            <li>Batteries</li>
+            </ul>
+        </section>
+        <section>
+            <h3>Do some charities collect?</h3>
+            <p>
+            Yes, some do. Please refer to the individual charity websites for
+            collection information.
+            </p>
+        </section>
+        <section>
+            <h3>Can I donate in store?</h3>
+            <p>
+            Yes, please refer to the individual charity website of open times.
+            </p>
+        </section>
+        <section>
+            <h3>How do charities get listed on Gifta?</h3>
+            <p>
+            Registered charities can email Kinda Communities via
+            hello@kindacommunities.com.au to enquire about listing on Gifta.
+            Listing on Gifta is free for all approved charities.
+            </p>
+        </section>
+    </article>
+
+    <article id="charity-info">
+        <p class="title-charity">Discover More About The Charities</p>
+        <div class="columns m-5">
+            <div class="column is-4" id="charity-buttons"></div>
+            <div class="column" id="wiki-box"></div>
         </div>
-        <div id="charity-info">
-            <div id="charity-buttons">
-            </div>
-            <div id="wiki-box"></div>
-        </div>
-    </section>
+    </article>
 
     <footer class="has-background-dark">
         <div>
             <div>
-                <p>
-                    © Gifta 2021. Made by Kinda Communities.
-                </p>
+                <p>© Gifta 2021. Made by Kinda Communities.</p>
             </div>
         </div>
     </footer>
 </body>
-
 </html>
