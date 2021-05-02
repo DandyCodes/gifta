@@ -14,6 +14,9 @@ function init() {
   });
   loadHistory();
   $("#search").click(search);
+  $("#invalid-postcode .modal-background, #invalid-postcode .modal-close").click( _ => {
+    $("#invalid-postcode").removeClass("is-active");
+  });
 }
 
 /* This is a callback invoked by the goolge maps API when the associated script loads
@@ -37,49 +40,52 @@ function loadHistory() {
 }
 
 function createPreviousSearchButton(postcodeInputValue, selectedItemName) {
-  const $previousSearchButton = $("<button>");
-  $previousSearchButton.text(`${postcodeInputValue} - ${selectedItemName}`);
-  $previousSearchButton.data("postcode", postcodeInputValue);
-  $previousSearchButton.data("item", selectedItemName);
-  $previousSearchButton.addClass("button is-justify-content-space-between");
-  $previousSearchButton.click(clickEvent => {
+  const previousSearchButton = $("<button>");
+  previousSearchButton.text(`${postcodeInputValue} - ${selectedItemName}`);
+  previousSearchButton.data("postcode", postcodeInputValue);
+  previousSearchButton.data("item", selectedItemName);
+  previousSearchButton.addClass("button is-justify-content-space-between");
+  previousSearchButton.click(clickEvent => {
     const postcode = $(clickEvent.target).data("postcode");
     const itemName = $(clickEvent.target).data("item");
     $("#postcode-input").val(postcode);
     $("#item-dropdown").val(itemName);
     search(clickEvent);
   });
-  const $deleteButton = $("<button>");
-  $deleteButton.addClass("delete");
-  $deleteButton.click(clickEvent => {
+  const deleteButton = $("<button>");
+  deleteButton.addClass("delete");
+  deleteButton.click(clickEvent => {
     clickEvent.stopPropagation();
-    const $parent = $(clickEvent.target).closest('.button');
-    const postcode = $parent.data("postcode");
-    const item = $parent.data("item");
+    const parent = $(clickEvent.target).closest('.button');
+    const postcode = parent.data("postcode");
+    const item = parent.data("item");
     searches.forEach((search, index) => {
       if (search.postcode === postcode && search.itemName === item) {
         searches.splice(index, 1)
       }
     });
     localStorage.setItem("searches", JSON.stringify(searches));
-    $parent.remove();
+    parent.remove();
   })
-  $previousSearchButton.append($deleteButton);
-  $("#search-history").append($previousSearchButton);
+  previousSearchButton.append(deleteButton);
+  $("#search-history").append(previousSearchButton);
 }
 
 function search(clickEvent) {
   clickEvent.preventDefault();
+  const postcodeInput = $("#postcode-input")[0];
+  if (postcodeInput.value) {
+    if (!postcodes.includes(postcodeInput.value)) {
+      $("#invalid-postcode").addClass("is-active")
+      postcodeInput.value = "";
+      return;
+    }
+  }
   const selectedItemName = $("#item-dropdown")[0].value.toLowerCase();
   if (selectedItemName === "select your category") return;
   const searchTerms = getCharitiesWhichAcceptItem(selectedItemName);
   clearMarkers();
-  const postcodeInput = $("#postcode-input")[0];
-  if (postcodeInput.value) {
-    if (!postcodes.includes(postcodeInput.value)) {
-      postcodeInput.value = "Invalid postcode";
-      return;
-    }
+  if(postcodeInput.value) {
     getPostcodeLocationAndSearch(postcodeInput.value, searchTerms);
   }
   else {

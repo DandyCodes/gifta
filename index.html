@@ -1,78 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/jpg" href="./assets/img/favicon.ico"/>
-    <link rel="stylesheet" href="./assets/css/mystyles.css">
+    <link rel="shortcut icon" type="image/jpg" href="./assets/img/favicon.ico">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/css/styles.css">
     <title>Gifta</title>
+
+    <!-- This script prevents the google maps API from overwriting the default Bulma font -->
+    <script>
+        const head = document.getElementsByTagName('head')[0];
+        // Save the original method
+        const insertBefore = head.insertBefore;
+        // Replace it!
+        head.insertBefore = function(newElement, referenceElement) {
+            if (newElement.href && newElement.href.indexOf('//fonts.googleapis.com/css?family=Roboto') > -1) {
+                //Prevent Roboto from loading
+                return;
+            }
+            insertBefore.call(head, newElement, referenceElement);
+        };
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" defer></script>
     <script src="./assets/js/postcodes.js" defer></script>
     <script src="./assets/js/charities.js" defer></script>
     <script src="./assets/js/index.js" defer></script>
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBrWndJ08DJDlbszJiaTRd23AZqll06DM&callback=initMap&libraries=places&v=weekly"
-        defer></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        defer
+    ></script>
 </head>
-
 <body class="has-background-primary-light">
-    <nav class="navbar is-spaced" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-            <a class="navbar-item-image" href="index.html">
-            </a>
-        </div>
-        <div id="navbarBasicExample" class="navbar-menu">
-            <div class="navbar-end">
-                <a class="navbar-item has-text-primary" href="#about">
-                    ABOUT
+    <header>
+        <nav class="navbar is-spaced" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="logo" href="">
+                    <img src="./assets/img/Gifta-logo-green.png">
                 </a>
-                <a class="navbar-item has-text-primary" href="./faq.html">
-                    FAQ
-                </a>
-                <a class="navbar-item has-text-primary" href="#contact">
-                    CONTACT
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
                 </a>
             </div>
-    </nav>
-
-    <section class="hero is-large is-info">
-        <div class="hero-body header-image">
-            <p class="title hero-title has-text-centered">
-                Think outside the trash
-            </p>
-            <p class="subtitle hero-subtitle has-text-centered">
-                Giving Made Easy
-            </p>
+            <div id="navbarBasicExample" class="navbar-menu">
+                <div class="navbar-end">
+                    <a class="navbar-item" href="#about">ABOUT</a>
+                    <a class="navbar-item" href="./faq.html">FAQ</a>
+                    <a class="navbar-item" href="#contact">CONTACT</a>
+                </div>
+            </div>
+        </nav>
+        <div class="hero is-large" id="index-hero">
+            <div class="hero-body">
+                <p class="hero-title has-text-white">Think outside the trash</p>
+                <p class="hero-subtitle has-text-white">Giving Made Easy</p>
+            </div>
         </div>
-    </section>
+    </header>
 
-    <section>
-        <div class="has-background-white has-text-centered p-5">
-            <h1 class="title title-charity is-narrow has-text-centered ">Find A Charity</h1>
-            <h2 class="subtitle p-1">Dispose of your unwanted item and help the community in the process.</h2>
-        </div>
-    </section>
+    <main>
+        <section>
+            <div class="has-background-white p-5">
+                <p class="title-charity">Find A Charity</p>
+                <p class="subtitle has-text-centered">Dispose of your unwanted item and help the community in the process.</p>
+            </div>
+        </section>
 
-    <section class="columns has-background-white has-text-centered pt-3 pb-3">
-        <div class="column is-3 is-offset-1" id="search-div">
-            <div class="box box-new">
-                <form action="">
+        <section class="columns has-background-white p-5">
+            <div class="column is-4" id="search-div">
+                <div class="box box-new">
                     <div class="field control has-icons-left">
                         <input class="input is-primary" type="text" placeholder="Postcode" id="postcode-input">
                         <span class="icon is-small is-left">
                             <i class="fas fa-map-marker-alt"></i>
                         </span>
                     </div>
+                    <div class="modal" id="invalid-postcode">
+                        <div class="modal-background"></div>
+                        <div class="modal-content">
+                            <div class="box box-new">
+                                <p class="title-charity">Invalid Postcode</p>
+                            </div>
+                        </div>
+                        <button class="modal-close is-large" aria-label="close"></button>
+                    </div>
                     <div class="field control">
                         <div class="select is-primary">
                             <select id="item-dropdown">
                                 <option value="" disabled selected>Select your category</option>
-                                <option>Any</option>
                                 <option>Shoes</option>
                                 <option>Handbags</option>
                                 <option>Computers & Accessories</option>
@@ -91,104 +111,134 @@
                         </div>
                     </div>
                     <button class="button is-primary" id="search">
-                        Search &nbsp;<i class="fas fa-recycle"></i>
+                        <span>Search</span>
+                        <span class="icon is-small is-right">
+                            <i class="fas fa-recycle"></i>
+                        </span>
                     </button>
                     <hr>
-                </form>
-                <div id="search-history"></div>
-            </div>
-        </div>
-        <div class="column is-7" id="map-div">
-            <div class="box box-new">
-                <div id="map"></div>
-            </div>
-        </div>
-    </section>
-
-    <section class="columns has-background-dark p-5">
-        <div class="column is-8 is-offset-2">
-            <div>
-                <h1 class="title has-text-centered has-text-white" id="about">ABOUT</h1>
-                <h4 class="title has-text-centered has-text-white">An Innovative Method To Charitable Giving</h4>
-                <p class="has-text-white has-text-centered">Available on all devices, Gift provides suggestions for
-                    nearby not-for-profits and charities in need of items users no longer need. Users simply upload
-                    their unwanted or items to be donated and Gifta provides real time solutions – making disposal
-                    sustainable and ethical whilst reusing items to those in need.
-                </p>
-                <br>
-                <p class="has-text-white has-text-centered">By showing users where to take their donations on a map of
-                    their immediate area, Gifta encourages members of the local community to cultivate sustainable
-                    re-purposing habits. Users are able to input a postcode or select search results generated based on
-                    their location.</p>
-                <br>
-                <p class="has-text-white has-text-centered">Users have the ability to comment on the app to share their
-                    tips and tricks as well as share content from the app to promote their giving, repurposing and
-                    reusing. Importantly, the app will also inform users which items should not be donated and which
-                    items are in demand around their area. </p>
-                <div class="column is-narrow has-text-centered" id="faq">
-                    <a href="./faq.html"><button class="button-faq is-primary-light is-center">
-                            VIEW FAQ
-                        </button></a>
+                    <div id="search-history"></div>
                 </div>
             </div>
-        </div>
-    </section>
-
-
-    <section class="columns mt-0 has-background-primary-light has-text-centered pt-3 pb-3">
-        <div class="column is-2 is-offset-3">
-            <div class="box">
-                <figure class="image">
-                    <img class="is-rounded" src="./assets/img/Gifta-reclaim.png" alt="reclaim">
-                </figure>
-                <h1 class="title">Reclaim</h1>
+            <div class="column is-8" id="map-div">
+                <div class="box box-new">
+                    <div id="map"></div>
+                </div>
             </div>
-        </div>
-        <div class="column is-2">
-            <div class="box">
-                <figure class="image">
-                    <img class="is-rounded" src="./assets/img/Gifta-repurpose.png" alt="repurpose">
-                </figure>
-                <h1 class="title">Repurpose</h1>
-            </div>
-        </div>
-        <div class="column is-2">
-            <div class="box">
-                <figure class="image">
-                    <img class="is-rounded" src="./assets/img/Gifta-rejoice.png" alt="rejoice">
-                </figure>
-                <h1 class="title">Rejoice</h1>
-            </div>
-        </div>
-    </section>
+        </section>
 
- 
-    <section class="has-background-primary" id="contact">
-        <div class="has-text-centered p-5">
-            <h1 class="title is-narrow has-text-centered has-text-white">TEAM</h1>
-        </div>
-        <div class="columns mb-0">
-            <div class="column is-5 is-offset-2">
+        <section class="columns has-background-dark p-5">
+            <div class="column is-8 is-offset-2">
+                <p class="title has-text-centered has-text-white" id="about">ABOUT</p>
+                <p class="subtitle has-text-centered has-text-white">An Innovative Method To Charitable Giving</p>
+                <p class="has-text-white has-text-centered">
+                    Available on all devices, Gift provides suggestions for 
+                    nearby not-for-profits and charities in need of items 
+                    users no longer need. Users simply upload their 
+                    unwanted or items to be donated and Gifta provides real 
+                    time solutions – making disposal sustainable and 
+                    ethical whilst repurposing items to those in need.
+                </p>
+                <br>
+                <p class="has-text-white has-text-centered">
+                    By showing users where to take their donations on a map 
+                    of their immediate area, Gifta encourages members of 
+                    the local community to cultivate sustainable 
+                    repurposing habits. Users are able to input a postcode 
+                    or select search results generated based on their 
+                    location.
+                </p>
+                <br>
+                <p class="has-text-white has-text-centered">
+                    Users have the ability to comment on the app to share 
+                    their tips and tricks as well as share content from the 
+                    app to promote their giving, repurposing and reusing. 
+                    Importantly, the app will also inform users which items 
+                    should not be donated and which items are in demand 
+                    around their area.
+                </p>
+                <div class="has-text-centered">
+                    <a href="./faq.html">
+                        <button class="button mt-5 subtitle">
+                            VIEW FAQ
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="columns has-text-centered p-3 mb-0" id="re-images">
+            <div class="column is-2 is-offset-3">
                 <div class="box">
-                    <p>Headquartered in Perth, Western Australia, Kinda Communities was founded by two local Perth students. Having met and studied at the University of Western Australia the pair were driven by the need to access appropriate charities after a number of State and National pandemics and emergencies saw many West Australians wanting to donate to charities but unsure what was needed, what charities accepted certain gifts and ultimately where to donate.
-                    </p><br>
-                    <p>As two self-appointed humanitarians, they devised an application to assist in a worthy cause and Kinda was created. Gifta was their first app with further applications & clients in the pipeline.
-                    </p><br>
-                    <p>Kinda Communities is currently welcoming new clients, and are available to assist not-for-profits and local charities in other web development areas.
-                    </p>
-                    <p>Reach out to us at
-                    </p>
+                    <figure class="image">
+                        <img class="is-rounded" src="./assets/img/Gifta-reclaim.png" alt="reclaim">
+                    </figure>
+                    <p class="title">Reclaim</p>
                 </div>
             </div>
             <div class="column is-2">
-                <div>
-                    <img src="./assets/img/KindaCommunities.png" alt="Kinda Communities">
+                <div class="box">
+                    <figure class="image">
+                        <img class="is-rounded" src="./assets/img/Gifta-repurpose.png" alt="repurpose">
+                    </figure>
+                    <p class="title">Repurpose</p>
                 </div>
             </div>
-        </div>
-    </section>
+            <div class="column is-2">
+                <div class="box">
+                    <figure class="image">
+                        <img class="is-rounded" src="./assets/img/Gifta-rejoice.png" alt="rejoice">
+                    </figure>
+                    <p class="title">Rejoice</p>
+                </div>
+            </div>
+        </section>
 
-    <footer class="footer has-background-dark pt-3 pb-3">
+        <section id="contact">
+            <p class="title has-text-centered has-text-white p-5 mb-0">TEAM</p>
+            <div class="columns m-0">
+                <div class="column is-5 is-offset-2">
+                    <div class="box">
+                        <p>
+                            Headquartered in Perth, Western Australia, Kinda 
+                            Communities was founded by two local Perth 
+                            students. Having met and studied at the University 
+                            of Western Australia the pair were driven by the 
+                            need to access appropriate charities after a number 
+                            of State and National pandemics and emergencies saw 
+                            many West Australians wanting to donate to 
+                            charities but unsure what was needed, what 
+                            charities accepted certain gifts and ultimately 
+                            where to donate.
+                        </p>
+                        <br>
+                        <p>
+                            As two self-described humanitarians, they devised 
+                            an application to assist in a worthy cause and 
+                            Kinda was created. Gifta was their first app with 
+                            further applications & clients in the pipeline.
+                        </p>
+                        <br>
+                        <p>
+                            Kinda Communities is currently welcoming new 
+                            clients, and are available to assist 
+                            not-for-profits and local charities in other web 
+                            development areas.
+                        </p>
+                        <p>Reach out to us at</p>
+                    </div>
+                </div>
+                
+                <div class="column is-3">
+                    <div>
+                        <img src="./assets/img/KindaCommunities.png" alt="Kinda Communities">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer has-background-dark p-5">
         <div class="container">
             <div class="content has-text-centered has-text-white">
                 <p>
@@ -197,6 +247,5 @@
             </div>
         </div>
     </footer>
-
 </body>
 </html>
