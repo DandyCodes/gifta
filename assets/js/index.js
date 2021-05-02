@@ -17,6 +17,10 @@ function init() {
   $("#invalid-postcode .modal-background, #invalid-postcode .modal-close").click( _ => {
     $("#invalid-postcode").removeClass("is-active");
   });
+  $(".navbar-burger").click(_ => {
+    $(".navbar-burger").toggleClass("is-active");
+    $(".navbar-menu").toggleClass("is-active");
+  });
 }
 
 /* This is a callback invoked by the goolge maps API when the associated script loads
